@@ -1,4 +1,8 @@
-﻿namespace Controller.States
+﻿using Controller.SpawnLogic;
+using Services;
+using View;
+
+namespace Controller.States
 {
     public class BootstrapState : State
     {
@@ -15,7 +19,7 @@
 
         private void RegisterServices()
         {
-            
+            ServiceLocator.Instance.Register(new GameFactory());
         }
         
     }

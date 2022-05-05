@@ -15,16 +15,18 @@ namespace Controller.States
         private void InitializeStateMap()
         {
             _statesMap.Add(typeof(BootstrapState), new BootstrapState(this));
+            _statesMap.Add(typeof(LoadDataState), new LoadDataState(this));
+            _statesMap.Add(typeof(GameLoopState), new GameLoopState(this));
         }
 
         public void ChangeState<T>() where T : State
         {
             if (_currentState is T) return;
-
             var type = typeof(T);
-            _currentState.Exit();
+            _currentState?.Exit();
             _currentState = _statesMap[type];
             _currentState.Enter();
         }
+        
     }
 }

@@ -10,11 +10,10 @@ namespace Controller.Pool
         {
             get
             {
-                if (_behaviour == null && TryGetComponent(out _behaviour))
+                if (_behaviour == null && !TryGetComponent(out _behaviour))
                 {
                     Debug.LogError("Object has not got link");
                 }
-
                 return _behaviour;
             }
         }

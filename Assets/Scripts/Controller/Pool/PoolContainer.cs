@@ -8,7 +8,7 @@ namespace Controller.Pool
     {
         [SerializeField] private List<PoolInfo> poolsInfo;
 
-        private Dictionary<Type, ObjectsPool> _poolsMap = new Dictionary<Type, ObjectsPool>();
+        private readonly Dictionary<Type, ObjectsPool> _poolsMap = new Dictionary<Type, ObjectsPool>();
 
         public void CreatePools()
         {
@@ -31,6 +31,6 @@ namespace Controller.Pool
             _poolsMap[typeof(T)].GetFreeElement<T>();
 
         public void ReturnElement<T>(T element) where T : MonoBehaviour, IPoolBehaviour => 
-            _poolsMap[typeof(T)].ReturnElement<T>(element);
+            _poolsMap[typeof(T)].ReturnElement(element);
     }
 }
