@@ -10,6 +10,7 @@
         {
             base.Enter();
             RegisterServices();
+            _stateMachine.ChangeState<LoadDataState>();
         }
 
         private void RegisterServices()
