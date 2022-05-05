@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Services
 {
@@ -19,7 +20,6 @@ namespace Services
             var type = typeof(T);
             if (_services.ContainsKey(type))
             {
-                //Debug.LogWarning($"Service map contains {type}");
                 return (T)_services[type];
             }
             _services.Add(type, newService);
@@ -40,7 +40,8 @@ namespace Services
                 return (T)_services[type];
             }
 
-            throw new Exception();
+            Debug.LogError($"Service {type.Name} does not contains.");
+            return default(T);
         }
     }
 }

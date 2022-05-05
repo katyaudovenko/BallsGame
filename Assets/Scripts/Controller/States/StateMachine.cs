@@ -14,7 +14,7 @@ namespace Controller.States
         }
         private void InitializeStateMap()
         {
-            
+            _statesMap.Add(typeof(BootstrapState), new BootstrapState(this));
         }
 
         public void ChangeState<T>() where T : State
@@ -25,11 +25,6 @@ namespace Controller.States
             _currentState.Exit();
             _currentState = _statesMap[type];
             _currentState.Enter();
-        }
-
-        public void Update()
-        {
-            _currentState.Update();
         }
     }
 }
