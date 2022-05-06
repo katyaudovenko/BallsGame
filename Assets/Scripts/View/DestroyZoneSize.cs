@@ -4,7 +4,9 @@ namespace View
 {
     public class DestroyZoneSize : MonoBehaviour
     {
-        [SerializeField] private float percentDestroyZoneSize;
+        [Range(0.001f, 1f)]
+        [SerializeField] private float relativeHeight;
+        
         private void Start()
         {
             var sizeX = GetWidthByScreen();
@@ -19,6 +21,7 @@ namespace View
             localScale.x = destroyZoneSize;
             transform.localScale = localScale;
         }
+        
         private void SetHeightByScreen(double destroyZoneSize)
         {
             var localScale = transform.localScale;
@@ -45,7 +48,7 @@ namespace View
             var leftUpCorner = new Vector2(0, 0);
             var worldLeftDownCorner = Camera.main.ScreenToWorldPoint(leftDownCorner);
             var worldLeftUpCorner = Camera.main.ScreenToWorldPoint(leftUpCorner);
-            var destroyZoneSize = (worldLeftDownCorner - worldLeftUpCorner).y * percentDestroyZoneSize;
+            var destroyZoneSize = (worldLeftDownCorner - worldLeftUpCorner).y * relativeHeight;
             return destroyZoneSize;
         }
     }
