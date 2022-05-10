@@ -25,5 +25,19 @@ namespace Controller.SpawnLogic
             ball.SetupPool(_poolContainer);
             return ball;
         }
+
+        public Ball GetBall(TypeBalls type, Vector2 position, Transform parent)
+        {
+            switch (type)
+            {
+                case TypeBalls.SimpleBall:
+                    return CreateBall<SimpleBall>(position, parent);
+                case TypeBalls.CompositeBall:
+                    return CreateBall<CompositeBall>(position, parent);                    
+                case TypeBalls.HeavyBall:
+                    return CreateBall<HeavyBall>(position, parent);
+            }
+            return null;
+        }
     }
 }

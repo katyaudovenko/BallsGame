@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Services;
 using UnityEngine;
-using View;
+using Random = UnityEngine.Random;
 
 namespace Controller.SpawnLogic
 {
@@ -9,52 +10,62 @@ namespace Controller.SpawnLogic
     {
         private const float MaxRange = 2.2f;
         private const float MinRange = -2.2f;
+
+        [SerializeField] private SpawnConfig[] spawnObjects;
+        [SerializeField] private float spawnDelay;
         
         private GameFactory _gameFactory;
+        private float _accumulatedWeight;
 
         private void Start()
         {
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
+            CalculateWeight();
             StartCoroutine(SpawnBallsWithDelay());
+        }
+        
+        private void CalculateWeight()
+        {
+            _accumulatedWeight = 0;
+            foreach (var ball in spawnObjects)
+            {
+                _accumulatedWeight += ball.chance;
+                ball.weight = _accumulatedWeight;
+            }
         }
         
         private IEnumerator SpawnBallsWithDelay()
         {
             while (true)
             {
-                yield return new WaitForSeconds(1f);
-                var probability = Random.Range(0f, 1f);
-                if (probability >= 0.4)
-                {
-                    CreateSimpleBall();
-                }
-
-                if (probability < 0.4 && probability >= 0.2)
-                {
-                    CreateCompositeBall();
-                }
-
-                if (probability < 0.2)
-                {
-                    CreateHeavyBall();
-                }
+                var type = (TypeBalls)GetRandomTypeBall();
+                yield return new WaitForSeconds(spawnDelay);
+                _gameFactory.GetBall(type, GetBallPosition(), transform);
             }
         }
-        
-        private void CreateSimpleBall() =>
-        _gameFactory.CreateBall<SimpleBall>(BallPosition(), transform);
 
-        private void CreateCompositeBall()=>
-            _gameFactory.CreateBall<CompositeBall>(BallPosition(), transform);
+        private int GetRandomTypeBall()
+        {
+            var random = Random.value * _accumulatedWeight;
+            for (var i = 0; i < spawnObjects.Length; i++)
+                if (spawnObjects[i].weight >= random)
+                    return i;
 
-        private void CreateHeavyBall()=>
-            _gameFactory.CreateBall<HeavyBall>(BallPosition(), transform);
-        
-        private Vector2 BallPosition()
+            return 0;
+        }
+
+        private Vector2 GetBallPosition()
         {
             var x = Random.Range(MinRange, MaxRange);
             var ballPosition = new Vector2(x, transform.position.y);
             return ballPosition;
         }
+    }
+
+    [Serializable]
+    public class SpawnConfig
+    {
+        [Range(0f,100f)] public float chance;
+        [HideInInspector] public float weight;
     }
 }

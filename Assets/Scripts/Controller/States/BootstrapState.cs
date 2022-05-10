@@ -20,6 +20,7 @@ namespace Controller.States
         private void RegisterServices()
         {
             ServiceLocator.Instance.Register(new GameFactory());
+            ServiceLocator.Instance.Register(new HealthService());
         }
         
     }
