@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Extensions;
 using Services;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,43 +14,22 @@ namespace Controller.SpawnLogic
 
         [SerializeField] private SpawnConfig[] spawnObjects;
         private GameFactory _gameFactory;
-        private float _accumulatedWeight;
 
         private void Start()
         {
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
-            CalculateWeight();
             StartCoroutine(SpawnBallsWithDelay());
         }
         
-        private void CalculateWeight()
-        {
-            _accumulatedWeight = 0;
-            foreach (var ball in spawnObjects)
-            {
-                _accumulatedWeight += ball.chance;
-                ball.weight = _accumulatedWeight;
-            }
-        }
         
         private IEnumerator SpawnBallsWithDelay()
         {
             while (true)
             {
-                var type = (TypeBalls)GetRandomTypeBall();
+                var type = spawnObjects.GetRandomItem(config => config.chance).ballType;
                 yield return new WaitForSeconds(0.5f);
                 _gameFactory.GetBall(type, GetBallPosition(), transform);
             }
-        }
-
-        private int GetRandomTypeBall()
-        {
-            var random = Random.value * _accumulatedWeight;
-            for (var i = 0; i < spawnObjects.Length; i++)
-                if (spawnObjects[i].weight >= random)
-                    return i;
-
-            return 0;
         }
 
         private Vector2 GetBallPosition()
@@ -64,6 +44,6 @@ namespace Controller.SpawnLogic
     public class SpawnConfig
     {
         [Range(0f,100f)] public float chance;
-        [HideInInspector] public float weight;
+        public BallType ballType;
     }
 }

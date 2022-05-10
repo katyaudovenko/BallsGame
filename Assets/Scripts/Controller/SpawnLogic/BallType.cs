@@ -1,9 +1,10 @@
 ﻿namespace Controller.SpawnLogic
 {
-    public enum TypeBalls
+    public enum BallType
     {
         SimpleBall,
         CompositeBall,
-        HeavyBall
+        HeavyBall,
+        ColdBall
     }
 }
