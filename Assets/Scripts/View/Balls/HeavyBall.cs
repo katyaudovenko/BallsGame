@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace View
+namespace View.Balls
 {
     public class HeavyBall : Ball
     {
         [SerializeField] private int timeLife;
-
-        private BallMove _ballMove;
+        
         private float _currentTime;
         private bool _isPressed;
 
-        private void Start()
+        public override void OnSetup()
         {
-            _ballMove = GetComponent<BallMove>();
-        }
-
-        private void OnEnable()
-        {
+            base.OnSetup();
             _currentTime = timeLife;
             _isPressed = false;
         }
@@ -38,13 +31,13 @@ namespace View
         private void OnMouseDown()
         {
             _isPressed = true;
-            _ballMove.StopMove();
+            BallMove.StopMove();
         }
 
         private void OnMouseUp()
         {
             _isPressed = false;
-            _ballMove.StartMove();
+            BallMove.StartMove();
         }
 
         public override void DestroyBall()
