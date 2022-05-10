@@ -26,27 +26,29 @@ namespace Controller.Pool
             }
         }
 
-        private PoolObject CreatePoolElement(bool isActiveByDefault = false)
+        private PoolObject CreatePoolElement()
         {
             var createdElement = Object.Instantiate(_prefab, _container);
-            createdElement.gameObject.SetActive(isActiveByDefault);
+            createdElement.gameObject.SetActive(false);
             createdElement.Behaviour.OnInitialize();
             return createdElement;
         }
 
-        public void ReturnElement<T>(T element) where T : MonoBehaviour, IPoolBehaviour
+        public void ReturnElement<T>(T element) where T : PoolObject, IPoolBehaviour
         {
             _pool.Push(element);
             element.transform.SetParent(_container);
             element.gameObject.SetActive(false);
+            element.Behaviour.OnReset();
         }
 
-        public T GetFreeElement<T>() where T : MonoBehaviour, IPoolBehaviour
+        public T GetFreeElement<T>() where T : PoolObject, IPoolBehaviour
         {
-            if (_pool.Count == 0)
-                return CreatePoolElement(true).Behaviour as T;
-            var element = _pool.Pop() as T;
+            var element = (_pool.Count == 0 ? 
+                CreatePoolElement().Behaviour : 
+                _pool.Pop()) as T;
             element.gameObject.SetActive(true);
+            element.Behaviour.OnSetup();
             return element;
         }
     }

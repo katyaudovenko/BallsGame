@@ -12,8 +12,6 @@ namespace Controller.SpawnLogic
         private const float MinRange = -2.2f;
 
         [SerializeField] private SpawnConfig[] spawnObjects;
-        [SerializeField] private float spawnDelay;
-        
         private GameFactory _gameFactory;
         private float _accumulatedWeight;
 
@@ -39,7 +37,7 @@ namespace Controller.SpawnLogic
             while (true)
             {
                 var type = (TypeBalls)GetRandomTypeBall();
-                yield return new WaitForSeconds(spawnDelay);
+                yield return new WaitForSeconds(0.5f);
                 _gameFactory.GetBall(type, GetBallPosition(), transform);
             }
         }

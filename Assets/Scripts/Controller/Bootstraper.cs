@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Controller.SpawnLogic;
 using Controller.States;
+using Services;
 using UnityEngine;
 
 namespace Controller
@@ -11,7 +12,9 @@ namespace Controller
         private void Awake()
         {
             _stateMachine = new StateMachine();
-            _stateMachine.ChangeState<BootstrapState>();
+           
+            _stateMachine.ChangeState<RegisterState>();
         }
+       
     }
 }

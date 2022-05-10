@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace View
+namespace View.Balls
 {
     public class CompositeBall : Ball
     {

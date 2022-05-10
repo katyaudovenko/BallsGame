@@ -14,7 +14,7 @@ namespace Controller.States
         }
         private void InitializeStateMap()
         {
-            _statesMap.Add(typeof(BootstrapState), new BootstrapState(this));
+            _statesMap.Add(typeof(RegisterState), new RegisterState(this));
             _statesMap.Add(typeof(LoadDataState), new LoadDataState(this));
             _statesMap.Add(typeof(GameLoopState), new GameLoopState(this));
         }
