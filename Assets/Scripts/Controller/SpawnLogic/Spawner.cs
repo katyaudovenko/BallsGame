@@ -14,20 +14,25 @@ namespace Controller.SpawnLogic
 
         [SerializeField] private SpawnConfig[] spawnObjects;
         private GameFactory _gameFactory;
+        private FreezeService _freezeService;
+ 
 
         private void Start()
         {
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
+            _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
             StartCoroutine(SpawnBallsWithDelay());
         }
-        
         
         private IEnumerator SpawnBallsWithDelay()
         {
             while (true)
             {
-                var type = spawnObjects.GetRandomItem(config => config.chance).ballType;
                 yield return new WaitForSeconds(0.5f);
+                
+                yield return new WaitUntil(() => !_freezeService.IsEffectActive);
+
+                var type = spawnObjects.GetRandomItem((config) => config.chance).ballType;
                 _gameFactory.GetBall(type, GetBallPosition(), transform);
             }
         }

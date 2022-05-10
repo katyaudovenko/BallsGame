@@ -8,9 +8,6 @@
             DestroyBall();
         }
         
-        public override void DestroyBall()
-        {
-            Pool.ReturnElement(this);
-        }
+        public override void DestroyBall() => Pool.ReturnElement(this);
     }
 }

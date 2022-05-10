@@ -11,11 +11,11 @@ namespace Services
         [SerializeField] private float freezeTime = 2;
 
         private float _currentTime;
-        private bool _isEffectActive;
+        public bool IsEffectActive { get; private set; }
 
         private void Update()
         {
-            if (!_isEffectActive) 
+            if (!IsEffectActive) 
                 return;
             
             _currentTime -= Time.deltaTime;
@@ -28,13 +28,13 @@ namespace Services
         public void StartFreeze()
         {
             _currentTime = freezeTime;
-            _isEffectActive = true;
+            IsEffectActive = true;
             OnStartFreeze?.Invoke();
         }
 
         private void EndFreeze()
         {
-            _isEffectActive = false;
+            IsEffectActive = false;
             OnEndFreeze?.Invoke();
         }
        
