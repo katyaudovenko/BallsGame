@@ -13,6 +13,7 @@ namespace View.Balls
         {
             Pool = pool;
         }
+        
         public virtual void OnInitialize()
         {
             BallMove = GetComponent<BallMove>();
