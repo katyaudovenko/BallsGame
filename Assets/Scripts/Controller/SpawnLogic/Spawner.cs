@@ -4,6 +4,7 @@ using Extensions;
 using Services;
 using UnityEngine;
 using Random = UnityEngine.Random;
+// ReSharper disable IteratorNeverReturns
 
 namespace Controller.SpawnLogic
 {
