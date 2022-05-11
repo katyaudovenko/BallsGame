@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Controller;
+using UnityEngine;
 
 namespace View.Balls
 {
@@ -27,6 +28,7 @@ namespace View.Balls
         public override void DestroyBall()
         {
             Pool.ReturnElement(this);
+            GlobalEventManager.OnDestroyBall();
         }
         
     }

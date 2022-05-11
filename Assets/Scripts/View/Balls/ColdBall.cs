@@ -1,4 +1,6 @@
-﻿namespace View.Balls
+﻿using Controller;
+
+namespace View.Balls
 {
     public class ColdBall : Ball
     {
@@ -7,7 +9,12 @@
             FreezeService.StartFreeze();
             DestroyBall();
         }
-        
-        public override void DestroyBall() => Pool.ReturnElement(this);
+
+        public override void DestroyBall()
+        {
+            Pool.ReturnElement(this);
+            GlobalEventManager.OnDestroyBall();
+        }
+            
     }
 }

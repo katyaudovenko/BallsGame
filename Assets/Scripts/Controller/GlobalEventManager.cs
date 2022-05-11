@@ -1,5 +1,5 @@
 ﻿using System;
-using Controller.States;
+using UnityEngine.Events;
 
 namespace Controller
 {
@@ -7,5 +7,8 @@ namespace Controller
     {
         public static event Action StartGame;
         public static void OnStartGame() => StartGame?.Invoke();
+
+        public static readonly UnityEvent DestroyBall = new UnityEvent();
+        public static void OnDestroyBall() => DestroyBall?.Invoke();
     }
 }

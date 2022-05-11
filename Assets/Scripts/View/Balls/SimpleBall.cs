@@ -1,4 +1,6 @@
-﻿namespace View.Balls
+﻿using Controller;
+
+namespace View.Balls
 {
     public class SimpleBall : Ball
     {
@@ -9,6 +11,7 @@
         public override void DestroyBall()
         {
             Pool.ReturnElement(this);
+            GlobalEventManager.OnDestroyBall();
         }
     }
 }
