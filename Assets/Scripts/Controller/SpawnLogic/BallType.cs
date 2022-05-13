@@ -5,6 +5,7 @@
         SimpleBall,
         CompositeBall,
         HeavyBall,
-        ColdBall
+        ColdBall,
+        BombBall
     }
 }
