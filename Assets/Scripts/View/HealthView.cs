@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Services;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +9,14 @@ namespace View
     public class HealthView : MonoBehaviour
     {
         [SerializeField] private List<Image> lives;
+        private HealthService _healthService;
+        private void Start()
+        {
+            _healthService = ServiceLocator.Instance.GetService<HealthService>();
+            _healthService.OnDamage += UpdateLivesCount;
+        }
 
-        public void UpdateLivesCount(int countLives)
+        private void UpdateLivesCount(int countLives)
         {
             for (var i = 0; i < lives.Count; i++)
             {
