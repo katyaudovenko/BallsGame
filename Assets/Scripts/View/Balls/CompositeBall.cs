@@ -1,5 +1,4 @@
-﻿using Controller;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace View.Balls
 {
@@ -22,13 +21,12 @@ namespace View.Balls
         private void Damage()
         {
             _livesCount--;
-            if (_livesCount <= 0)
-                DestroyBall();
+            if (_livesCount <= 0) 
+                DestroyBallByUser();
         }
-        public override void DestroyBall()
+        protected override void OnBallDestroy()
         {
             Pool.ReturnElement(this);
-            GlobalEventManager.OnDestroyBall();
         }
         
     }

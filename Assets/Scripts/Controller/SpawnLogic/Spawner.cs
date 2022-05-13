@@ -3,6 +3,7 @@ using System.Collections;
 using Extensions;
 using Services;
 using UnityEngine;
+using View.Balls;
 using Random = UnityEngine.Random;
 // ReSharper disable IteratorNeverReturns
 
@@ -16,11 +17,13 @@ namespace Controller.SpawnLogic
         [SerializeField] private SpawnConfig[] spawnObjects;
         private GameFactory _gameFactory;
         private FreezeService _freezeService;
+        private BallsManager _ballsManager;
  
 
         private void Start()
         {
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
+            _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
             StartCoroutine(SpawnBallsWithDelay());
         }
@@ -34,7 +37,8 @@ namespace Controller.SpawnLogic
                 yield return new WaitUntil(() => !_freezeService.IsEffectActive);
 
                 var type = spawnObjects.GetRandomItem((config) => config.chance).ballType;
-                _gameFactory.GetBall(type, GetBallPosition(), transform);
+                var ball = _gameFactory.GetBall(type, GetBallPosition(), transform);
+                _ballsManager.AddBall(ball);
             }
         }
 

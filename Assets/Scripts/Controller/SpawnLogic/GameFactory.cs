@@ -29,6 +29,8 @@ namespace Controller.SpawnLogic
                     return CreateBall<HeavyBall>(position, parent);
                 case BallType.ColdBall:
                     return CreateBall<ColdBall>(position, parent);
+                case BallType.BombBall:
+                    return CreateBall<BombBall>(position, parent);
             }
             return null;
         }

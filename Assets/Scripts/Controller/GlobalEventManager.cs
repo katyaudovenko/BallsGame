@@ -7,8 +7,5 @@ namespace Controller
     {
         public static event Action StartGame;
         public static void OnStartGame() => StartGame?.Invoke();
-
-        public static readonly UnityEvent DestroyBall = new UnityEvent();
-        public static void OnDestroyBall() => DestroyBall?.Invoke();
     }
 }

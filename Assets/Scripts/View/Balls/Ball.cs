@@ -1,15 +1,17 @@
-﻿using Controller;
-using Controller.Pool;
+﻿using Controller.Pool;
 using Services;
-using UnityEngine;
+
 
 namespace View.Balls
 {
     public abstract class Ball : PoolObject, IPoolBehaviour
     {
+        private BallsManager _ballsManager;
+        private ScoreService _scoreService;
+
         protected PoolContainer Pool;
         protected FreezeService FreezeService;
-        protected BallMove BallMove { get; private set; }
+        public BallMove BallMove { get; private set; }
         
         public void SetupPool(PoolContainer pool)
         {
@@ -20,20 +22,26 @@ namespace View.Balls
         {
             BallMove = GetComponent<BallMove>();
             FreezeService = ServiceLocator.Instance.GetService<FreezeService>();
+            _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
+            _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
         }
 
-        public virtual void OnSetup()
+        public void DestroyBallByUser()
         {
-            FreezeService.OnStartFreeze += BallMove.StopMove;
-            FreezeService.OnEndFreeze += BallMove.StartMove;
+            _scoreService.AddScore(1);
+            _ballsManager.RemoveBall(this);
+            OnBallDestroy();
         }
-
-        public virtual void OnReset()
+        public void DestroyBall()
         {
-            FreezeService.OnStartFreeze -= BallMove.StopMove;
-            FreezeService.OnEndFreeze -= BallMove.StartMove;
+            _ballsManager.RemoveBall(this);
+            OnBallDestroy();
         }
+        
+        public virtual void OnSetup() { }
 
-        public abstract void DestroyBall();
+        public virtual void OnReset() { }
+        
+        protected abstract void OnBallDestroy();
     }
 }

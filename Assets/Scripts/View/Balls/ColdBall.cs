@@ -1,4 +1,4 @@
-﻿using Controller;
+﻿using Services;
 
 namespace View.Balls
 {
@@ -7,13 +7,12 @@ namespace View.Balls
         private void OnMouseDown()
         {
             FreezeService.StartFreeze();
-            DestroyBall();
+            DestroyBallByUser();
         }
 
-        public override void DestroyBall()
+        protected override void OnBallDestroy()
         {
             Pool.ReturnElement(this);
-            GlobalEventManager.OnDestroyBall();
         }
             
     }

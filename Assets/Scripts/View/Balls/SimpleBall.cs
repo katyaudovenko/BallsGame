@@ -1,17 +1,14 @@
-﻿using Controller;
-
-namespace View.Balls
+﻿namespace View.Balls
 {
     public class SimpleBall : Ball
     {
         private void OnMouseDown()
         {
-            DestroyBall();
+            DestroyBallByUser();
         }
-        public override void DestroyBall()
+        protected override void OnBallDestroy()
         {
             Pool.ReturnElement(this);
-            GlobalEventManager.OnDestroyBall();
         }
     }
 }

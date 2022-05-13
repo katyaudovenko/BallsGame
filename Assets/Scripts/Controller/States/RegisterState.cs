@@ -1,6 +1,7 @@
 ﻿using Controller.SpawnLogic;
 using Services;
 using UnityEngine;
+using View.Balls;
 
 
 namespace Controller.States
@@ -21,7 +22,10 @@ namespace Controller.States
         }
         private void RegisterServices()
         {
+            ServiceLocator.Instance.Register(new ScoreService());
+            var ballsManager = ServiceLocator.Instance.Register(new BallsManager());
             RegisterFreezeService();
+            ServiceLocator.Instance.Register(new DetonateService(ballsManager));
             ServiceLocator.Instance.Register(new GameFactory());
             ServiceLocator.Instance.Register(new HealthService(HealthCount));
         }

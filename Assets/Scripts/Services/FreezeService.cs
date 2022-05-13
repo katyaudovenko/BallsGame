@@ -1,14 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using View.Balls;
 
 namespace Services
 {
     public class FreezeService : MonoBehaviour, IService
     {
-        public event Action OnStartFreeze;
-        public event Action OnEndFreeze;
-        
         [SerializeField] private float freezeTime = 2;
+        private readonly BallsManager _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
 
         private float _currentTime;
         public bool IsEffectActive { get; private set; }
@@ -29,13 +27,13 @@ namespace Services
         {
             _currentTime = freezeTime;
             IsEffectActive = true;
-            OnStartFreeze?.Invoke();
+           _ballsManager.InvokeActionOnBall<Ball>(ball => ball.BallMove.StopMove());
         }
 
         private void EndFreeze()
         {
             IsEffectActive = false;
-            OnEndFreeze?.Invoke();
+            _ballsManager.InvokeActionOnBall<Ball>(ball => ball.BallMove.StartMove());
         }
        
     }

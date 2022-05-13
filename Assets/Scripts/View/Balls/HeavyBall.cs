@@ -1,5 +1,4 @@
-﻿using Controller;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace View.Balls
 {
@@ -22,10 +21,8 @@ namespace View.Balls
             if (_isPressed)
             {
                 _currentTime -= Time.deltaTime;
-                if (_currentTime <= 0)
-                {
-                    DestroyBall();
-                }
+                if (_currentTime <= 0) 
+                    DestroyBallByUser();
             }
         }
 
@@ -37,14 +34,14 @@ namespace View.Balls
 
         private void OnMouseUp()
         {
+            if (FreezeService.IsEffectActive) return;
             _isPressed = false;
             BallMove.StartMove();
         }
 
-        public override void DestroyBall()
+        protected override void OnBallDestroy()
         {
             Pool.ReturnElement(this);
-            GlobalEventManager.OnDestroyBall();
         }
     }
 }

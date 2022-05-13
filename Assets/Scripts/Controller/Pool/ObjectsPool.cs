@@ -36,6 +36,9 @@ namespace Controller.Pool
 
         public void ReturnElement<T>(T element) where T : PoolObject, IPoolBehaviour
         {
+            if (_pool.Contains(element))
+                return;
+            
             _pool.Push(element);
             element.transform.SetParent(_container);
             element.gameObject.SetActive(false);
