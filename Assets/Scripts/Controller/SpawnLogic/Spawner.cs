@@ -3,6 +3,7 @@ using System.Collections;
 using Extensions;
 using Services;
 using UnityEngine;
+using View;
 using View.Balls;
 using Random = UnityEngine.Random;
 // ReSharper disable IteratorNeverReturns
@@ -11,20 +12,22 @@ namespace Controller.SpawnLogic
 {
     public class Spawner : MonoBehaviour
     {
-        private const float MaxRange = 2.2f;
-        private const float MinRange = -2.2f;
-
         [SerializeField] private SpawnConfig[] spawnObjects;
+        [SerializeField] private float timeSpawnDelay = 1;
         private GameFactory _gameFactory;
         private FreezeService _freezeService;
         private BallsManager _ballsManager;
- 
+
+        private float _maxRange;
+        private float _minRange;
 
         private void Start()
         {
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
+            _maxRange = SpawnZoneSize.RightBorder();
+            _minRange = SpawnZoneSize.LeftBorder();
             StartCoroutine(SpawnBallsWithDelay());
         }
         
@@ -32,7 +35,7 @@ namespace Controller.SpawnLogic
         {
             while (true)
             {
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(timeSpawnDelay);
                 
                 yield return new WaitUntil(() => !_freezeService.IsEffectActive);
 
@@ -44,7 +47,7 @@ namespace Controller.SpawnLogic
 
         private Vector2 GetBallPosition()
         {
-            var x = Random.Range(MinRange, MaxRange);
+            var x = Random.Range(_minRange, _maxRange);
             var ballPosition = new Vector2(x, transform.position.y);
             return ballPosition;
         }
