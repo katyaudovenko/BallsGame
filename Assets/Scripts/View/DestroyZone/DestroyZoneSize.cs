@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace View
+namespace View.DestroyZone
 {
     public class DestroyZoneSize : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using Services;
 using UnityEngine;
 using View.Balls;
 
-namespace View
+namespace View.DestroyZone
 {
     public class DestroyZone : MonoBehaviour
     {
