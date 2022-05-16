@@ -23,6 +23,7 @@ namespace Controller.States
         private void RegisterServices()
         {
             ServiceLocator.Instance.Register(new ScoreService());
+            ServiceLocator.Instance.Register(new CoinsService());
             var ballsManager = ServiceLocator.Instance.Register(new BallsManager());
             RegisterFreezeService();
             ServiceLocator.Instance.Register(new DetonateService(ballsManager));

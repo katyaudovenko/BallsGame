@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace View
 {
+    [RequireComponent(typeof(TextMeshProUGUI))]
     public class ScoreView : MonoBehaviour
     {
         private TextMeshProUGUI _scoreText;

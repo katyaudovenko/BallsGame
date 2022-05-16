@@ -6,13 +6,18 @@ namespace View.Balls
 {
     public abstract class Ball : PoolObject, IPoolBehaviour
     {
+        private const int BasicNumberScore = 1;
+        
         private BallsManager _ballsManager;
         private ScoreService _scoreService;
+        private CoinsService _coinsService;
 
         protected PoolContainer Pool;
         protected FreezeService FreezeService;
-        public BallMove BallMove { get; private set; }
         
+        protected virtual int CostBall { get; set; }
+        public BallMove BallMove { get; private set; }
+
         public void SetupPool(PoolContainer pool)
         {
             Pool = pool;
@@ -24,11 +29,13 @@ namespace View.Balls
             FreezeService = ServiceLocator.Instance.GetService<FreezeService>();
             _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
+            _coinsService = ServiceLocator.Instance.GetService<CoinsService>();
         }
 
         public void DestroyBallByUser()
         {
-            _scoreService.AddScore(1);
+           _scoreService.AddScore(BasicNumberScore);
+           _coinsService.AddCoin(CostBall);
             _ballsManager.RemoveBall(this);
             OnBallDestroy();
         }

@@ -9,6 +9,12 @@ namespace View.Balls
         private float _currentTime;
         private bool _isPressed;
 
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+            CostBall = 3;
+        }
+
         public override void OnSetup()
         {
             base.OnSetup();

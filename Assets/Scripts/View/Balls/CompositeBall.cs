@@ -8,6 +8,12 @@ namespace View.Balls
 
         private int _livesCount;
 
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+            CostBall = 2;
+        }
+
         private void OnEnable()
         {
             _livesCount = livesCount;
