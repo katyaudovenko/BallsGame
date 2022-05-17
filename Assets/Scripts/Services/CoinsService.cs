@@ -4,13 +4,13 @@ namespace Services
 {
     public class CoinsService : IService
     {
-        public event Action OnCoinAdd;
-        public int CoinsCount { get; private set; }
+        public event Action OnChanged;
+        public int Coins { get; private set; }
 
-        public void AddCoin(int coinsCount)
+        public void AddCoin(int value)
         {
-            CoinsCount += coinsCount;
-            OnCoinAdd?.Invoke();
+            Coins += value;
+            OnChanged?.Invoke();
         }
     }
 }

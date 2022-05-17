@@ -12,11 +12,12 @@ namespace View
         private void Start()
         {
             _healthService = ServiceLocator.Instance.GetService<HealthService>();
-            _healthService.OnDamage += UpdateLivesCount;
+            _healthService.OnChanged += UpdateLivesCount;
         }
 
-        private void UpdateLivesCount(int countLives)
+        private void UpdateLivesCount()
         {
+            var countLives = _healthService.Health;
             for (var i = 0; i < lives.Count; i++)
             {
                 var isActive = i < countLives;

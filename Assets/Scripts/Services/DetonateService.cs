@@ -7,8 +7,8 @@ namespace Services
 {
     public class DetonateService : IService
     {
-        private readonly BallsManager _ballsManager;
         private const float Radius = 3;
+        private readonly BallsManager _ballsManager;
         private readonly Queue<Action> _detonateQueue = new Queue<Action>();
         private bool _isEffectActive;
 

@@ -36,8 +36,7 @@ namespace View.Balls
         {
            _scoreService.AddScore(BasicNumberScore);
            _coinsService.AddCoin(CostBall);
-            _ballsManager.RemoveBall(this);
-            OnBallDestroy();
+           DestroyBall();
         }
         public void DestroyBall()
         {

@@ -4,19 +4,20 @@ namespace Services
 {
     public class HealthService: IService
     {
-        public event Action<int> OnDamage;
-        public int HealthCount { get; private set; }
-        public HealthService(int healthCount)
+        public event Action OnChanged;
+        public int Health { get; private set; }
+        public HealthService(int health)
         {
-            HealthCount = healthCount;
+            Health = health;
         }
         
-        public void Damage(int damage)
+        public void Receive(int value)
         {
-            HealthCount -= damage;
-            OnDamage?.Invoke(HealthCount);
-            if (HealthCount <= 0)
-                HealthCount = 0;
+            Health -= value;
+            OnChanged?.Invoke();
+            
+            if (Health < 0)
+                Health = 0;
         }
     }
 }

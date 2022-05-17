@@ -15,12 +15,13 @@ namespace View
         {
             _coins = ServiceLocator.Instance.GetService<CoinsService>();
             _coinsText = GetComponent<TextMeshProUGUI>();
-            _coins.OnCoinAdd += UpdateCoinsCount;
+            _coins.OnChanged += UpdateCoinsCount;
+            UpdateCoinsCount();
         }
 
         private void UpdateCoinsCount()
         {
-            _coinsText.text = _coins.CoinsCount.ToString();
+            _coinsText.text = _coins.Coins.ToString();
         }
     }
 }

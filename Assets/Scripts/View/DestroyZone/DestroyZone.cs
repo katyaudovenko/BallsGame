@@ -22,8 +22,8 @@ namespace View.DestroyZone
 
         private void DecreaseHealth()
         {
-            _healthService.Damage(1);
-            Debug.Log(_healthService.HealthCount);
+            _healthService.Receive(1);
+            Debug.Log(_healthService.Health);
         }
         
     }

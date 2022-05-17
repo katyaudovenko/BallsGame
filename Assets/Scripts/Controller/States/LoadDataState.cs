@@ -1,6 +1,4 @@
-﻿using Services;
-
-namespace Controller.States
+﻿namespace Controller.States
 {
     public class LoadDataState : State
     {
