@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Model;
+using UnityEngine;
 
 namespace View.Balls
 {
     public class CompositeBall : Ball
     {
-        [SerializeField] private int livesCount = 2;
+        [SerializeField] private BallInfo compositeBallInfo;
 
         private int _livesCount;
 
@@ -16,7 +17,7 @@ namespace View.Balls
 
         private void OnEnable()
         {
-            _livesCount = livesCount;
+            _livesCount = compositeBallInfo.LivesCountCompositeBall;
         }
 
         private void OnMouseDown()

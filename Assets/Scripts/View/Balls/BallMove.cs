@@ -1,10 +1,11 @@
+using Model;
 using UnityEngine;
 
 namespace View.Balls
 {
     public class BallMove : MonoBehaviour
     {
-        public float speed;
+        [SerializeField] private BallInfo info;
 
         private Rigidbody2D _rigidbody2D;
 
@@ -20,7 +21,7 @@ namespace View.Balls
 
         public void StartMove()
         {
-            _rigidbody2D.velocity = Vector2.down * speed;
+            _rigidbody2D.velocity = Vector2.down * info.Speed;
         }
 
         public void StopMove()

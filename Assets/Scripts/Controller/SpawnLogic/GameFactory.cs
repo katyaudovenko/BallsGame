@@ -17,31 +17,39 @@ namespace Controller.SpawnLogic
             _poolContainer.CreatePools();
         }
 
-        public Ball GetBall(BallType ballType, Vector2 position, Transform parent)
+        public Ball GetBall(BallType ballType, Vector2 position, Transform parent, Vector3 scale, Color color)
         {
             switch (ballType)
             {
                 case BallType.SimpleBall:
-                    return CreateBall<SimpleBall>(position, parent);
+                    return CreateBall<SimpleBall>(position, parent, scale, color);
                 case BallType.CompositeBall:
-                    return CreateBall<CompositeBall>(position, parent);                    
+                    return CreateBall<CompositeBall>(position, parent, scale, color);                    
                 case BallType.HeavyBall:
-                    return CreateBall<HeavyBall>(position, parent);
+                    return CreateBall<HeavyBall>(position, parent, scale, color);
                 case BallType.ColdBall:
-                    return CreateBall<ColdBall>(position, parent);
+                    return CreateBall<ColdBall>(position, parent, scale, color);
                 case BallType.BombBall:
-                    return CreateBall<BombBall>(position, parent);
+                    return CreateBall<BombBall>(position, parent, scale, color);
             }
             return null;
         }
 
-        private T CreateBall<T>(Vector2 position, Transform parent) where T : Ball
+        private T CreateBall<T>(Vector2 position, Transform parent, Vector3 scale, Color color) where T : Ball
         {
             var ball = _poolContainer.GetFreeElement<T>();
             ball.transform.position = position;
+            ball.transform.localScale = scale;
+            SetColor(color, ball);
             ball.transform.SetParent(parent);
             ball.SetupPool(_poolContainer);
             return ball;
+        }
+
+        private static void SetColor<T>(Color color, T ball) where T : Ball
+        {
+            var renderer = ball.GetComponentInChildren<SpriteRenderer>();
+            renderer.color = ball is BombBall || ball is ColdBall ? Color.white : color;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace View.Balls
         protected PoolContainer Pool;
         protected FreezeService FreezeService;
         
-        protected virtual int CostBall { get; set; }
+        protected int CostBall { get; set; }
         public BallMove BallMove { get; private set; }
 
         public void SetupPool(PoolContainer pool)

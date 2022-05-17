@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Model;
+using UnityEngine;
 
 namespace View.Balls
 {
     public class HeavyBall : Ball
     {
-        [SerializeField] private int timeLife;
+        [SerializeField] private BallInfo info;
         
         private float _currentTime;
         private bool _isPressed;
@@ -18,7 +19,7 @@ namespace View.Balls
         public override void OnSetup()
         {
             base.OnSetup();
-            _currentTime = timeLife;
+            _currentTime = info.TimeLifeHeavyBall;
             _isPressed = false;
         }
 
