@@ -41,7 +41,6 @@ namespace View.Balls
 
         private void OnMouseUp()
         {
-            if (FreezeService.IsEffectActive) return;
             _isPressed = false;
             BallMove.StartMove();
         }

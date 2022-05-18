@@ -1,4 +1,5 @@
 using Model;
+using Services;
 using UnityEngine;
 
 namespace View.Balls
@@ -8,10 +9,12 @@ namespace View.Balls
         [SerializeField] private BallInfo info;
 
         private Rigidbody2D _rigidbody2D;
+        private FreezeService _freezeService;
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
         }
 
         private void OnEnable()
@@ -21,7 +24,8 @@ namespace View.Balls
 
         public void StartMove()
         {
-            _rigidbody2D.velocity = Vector2.down * info.Speed;
+            if(!_freezeService.IsEffectActive)
+                _rigidbody2D.velocity = Vector2.down * info.Speed;
         }
 
         public void StopMove()
