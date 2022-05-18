@@ -6,11 +6,17 @@ namespace Services
 {
     public class FreezeService : MonoBehaviour, IService
     {
-        [SerializeField] private FreezeInfo freezeInfo;
-        private readonly BallsManager _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
+        private FreezeInfo _freezeInfo;
+        private BallsManager _ballsManager;
 
         private float _currentTime;
         public bool IsEffectActive { get; private set; }
+
+        private void Start()
+        {
+            _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
+            _freezeInfo = ConfigService.Instance.GetConfig<FreezeInfo>();
+        }
 
         private void Update()
         {
@@ -26,7 +32,7 @@ namespace Services
 
         public void StartFreeze()
         {
-            _currentTime = freezeInfo.FreezeTime;
+            _currentTime = _freezeInfo.FreezeTime;
             IsEffectActive = true;
            _ballsManager.InvokeActionOnBall<Ball>(ball => ball.BallMove.StopMove());
         }

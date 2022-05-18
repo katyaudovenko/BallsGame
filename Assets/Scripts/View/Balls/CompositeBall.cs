@@ -1,25 +1,26 @@
 ﻿using Model;
-using UnityEngine;
+using Services;
 
 namespace View.Balls
 {
     public class CompositeBall : Ball
     {
-        [SerializeField] private BallInfo compositeBallInfo;
-
+        private BallInfo _info;
         private int _livesCount;
 
         public override void OnInitialize()
         {
             base.OnInitialize();
+            _info = ConfigService.Instance.GetConfig<BallInfo>();
             CostBall = 2;
         }
 
-        private void OnEnable()
+        public override void OnSetup()
         {
-            _livesCount = compositeBallInfo.LivesCountCompositeBall;
+            base.OnSetup();
+            _livesCount = _info.LivesCountCompositeBall;
         }
-
+        
         private void OnMouseDown()
         {
             Damage();

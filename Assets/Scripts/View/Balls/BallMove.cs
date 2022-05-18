@@ -6,14 +6,14 @@ namespace View.Balls
 {
     public class BallMove : MonoBehaviour
     {
-        [SerializeField] private BallInfo info;
-
+        private BallInfo _info;
         private Rigidbody2D _rigidbody2D;
         private FreezeService _freezeService;
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            _info = ConfigService.Instance.GetConfig<BallInfo>();
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
         }
 
@@ -25,7 +25,7 @@ namespace View.Balls
         public void StartMove()
         {
             if(!_freezeService.IsEffectActive)
-                _rigidbody2D.velocity = Vector2.down * info.Speed;
+                _rigidbody2D.velocity = Vector2.down * _info.Speed;
         }
 
         public void StopMove()

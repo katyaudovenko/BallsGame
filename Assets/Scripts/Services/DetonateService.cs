@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model;
 using UnityEngine;
 using View.Balls;
 
@@ -7,7 +8,7 @@ namespace Services
 {
     public class DetonateService : IService
     {
-        private const float Radius = 3;
+        private readonly DetonateInfo _info;
         private readonly BallsManager _ballsManager;
         private readonly Queue<Action> _detonateQueue = new Queue<Action>();
         private bool _isEffectActive;
@@ -15,6 +16,7 @@ namespace Services
         public DetonateService(BallsManager ballsManager)
         {
             _ballsManager = ballsManager;
+            _info = ConfigService.Instance.GetConfig<DetonateInfo>();
         }
 
         public void PlanDetonate(Vector3 position)
@@ -38,7 +40,7 @@ namespace Services
             _ballsManager.InvokeActionOnBall<Ball>(ball =>
             {
                 var distance = (ball.transform.position - position).magnitude;
-                if (distance < Radius)
+                if (distance < _info.Radius)
                 {
                     destroyBalls.Add(ball);
                 }

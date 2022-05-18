@@ -3,6 +3,7 @@ using Extensions;
 using Model;
 using Services;
 using UnityEngine;
+using View;
 using View.Balls;
 using Random = UnityEngine.Random;
 // ReSharper disable IteratorNeverReturns
@@ -11,18 +12,24 @@ namespace Controller.SpawnLogic
 {
     public class Spawner : MonoBehaviour
     {
-        [SerializeField] private SpawnInfo spawnInfo;
-        [SerializeField] private BallInfo ballInfo;
-        
+        private SpawnInfo _spawnInfo;
+        private BallInfo _ballInfo;
         private GameFactory _gameFactory;
         private FreezeService _freezeService;
         private BallsManager _ballsManager;
+        private SpawnZoneSize _spawnZoneSize;
         
         private void Start()
         {
+            _spawnInfo = ConfigService.Instance.GetConfig<SpawnInfo>();
+            _ballInfo = ConfigService.Instance.GetConfig<BallInfo>();
+            
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
+            
+            _spawnZoneSize = GetComponent<SpawnZoneSize>();
+            
             StartCoroutine(SpawnBallsWithDelay());
         }
         
@@ -30,19 +37,21 @@ namespace Controller.SpawnLogic
         {
             while (true)
             {
-                yield return new WaitForSeconds(spawnInfo.TimeSpawnDelay);
+                yield return new WaitForSeconds(_spawnInfo.TimeSpawnDelay);
                 
                 yield return new WaitUntil(() => !_freezeService.IsEffectActive);
 
-                var type = spawnInfo.SpawnObjects.GetRandomItem((config) => config.chance).ballType;
-                var ball = _gameFactory.GetBall(type, GetBallPosition(), transform, ballInfo.BallSize, ballInfo.Color);
+                var type = _spawnInfo.SpawnObjects.GetRandomItem(config => config.chance).ballType;
+                var ball = _gameFactory.GetBall(type, GetBallPosition(), transform, _ballInfo.BallSize, _ballInfo.Color);
                 _ballsManager.AddBall(ball);
             }
         }
 
         private Vector2 GetBallPosition()
         {
-            var x = Random.Range(spawnInfo.MinPoint, spawnInfo.MaxPoint);
+            var minInclusive = _spawnZoneSize.LeftBorder();
+            var maxInclusive = _spawnZoneSize.RightBorder();
+            var x = Random.Range(minInclusive,maxInclusive);
             var ballPosition = new Vector2(x, transform.position.y);
             return ballPosition;
         }

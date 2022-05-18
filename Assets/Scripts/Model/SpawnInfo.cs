@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using View;
 
 namespace Model
 {
@@ -11,8 +10,6 @@ namespace Model
         
         [SerializeField] private SpawnConfig[] spawnObjects;
         public SpawnConfig[] SpawnObjects => spawnObjects;
-
-        public float MinPoint => SpawnZoneSize.LeftBorder();
-        public float MaxPoint => SpawnZoneSize.RightBorder();
+        
     }
 }

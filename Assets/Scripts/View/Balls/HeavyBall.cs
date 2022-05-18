@@ -1,25 +1,26 @@
 ﻿using Model;
+using Services;
 using UnityEngine;
 
 namespace View.Balls
 {
     public class HeavyBall : Ball
     {
-        [SerializeField] private BallInfo info;
-        
+        private BallInfo _info;
         private float _currentTime;
         private bool _isPressed;
 
         public override void OnInitialize()
         {
             base.OnInitialize();
+            _info = ConfigService.Instance.GetConfig<BallInfo>();
             CostBall = 3;
         }
 
         public override void OnSetup()
         {
             base.OnSetup();
-            _currentTime = info.TimeLifeHeavyBall;
+            _currentTime = _info.TimeLifeHeavyBall;
             _isPressed = false;
         }
 

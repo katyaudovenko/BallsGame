@@ -13,7 +13,6 @@ namespace View.Balls
         private CoinsService _coinsService;
 
         protected PoolContainer Pool;
-
         protected int CostBall { get; set; }
         public BallMove BallMove { get; private set; }
 
