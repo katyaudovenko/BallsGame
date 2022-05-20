@@ -17,6 +17,7 @@ namespace Controller.States
             _statesMap.Add(typeof(RegisterState), new RegisterState(this));
             _statesMap.Add(typeof(LoadDataState), new LoadDataState(this));
             _statesMap.Add(typeof(GameLoopState), new GameLoopState(this));
+            _statesMap.Add(typeof(EndGameState), new EndGameState(this));
         }
 
         public void ChangeState<T>() where T : State

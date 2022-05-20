@@ -1,4 +1,6 @@
-﻿namespace Controller.States
+﻿using Services;
+
+namespace Controller.States
 {
     public class LoadDataState : State
     {
@@ -16,7 +18,8 @@
 
         private void LoadData()
         {
-            
+            var progress = ServiceLocator.Instance.GetService<ProgressService>();
+            progress.Load();
         }
     }
 }
