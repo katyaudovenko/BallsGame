@@ -12,6 +12,7 @@ namespace View.Balls
         private ScoreService _scoreService;
         private CoinsService _coinsService;
 
+        protected FreezeService FreezeService;
         protected PoolContainer Pool;
         protected int CostBall { get; set; }
         public BallMove BallMove { get; private set; }
@@ -24,6 +25,7 @@ namespace View.Balls
         public virtual void OnInitialize()
         {
             BallMove = GetComponent<BallMove>();
+            FreezeService = ServiceLocator.Instance.GetService<FreezeService>();
             _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             _coinsService = ServiceLocator.Instance.GetService<CoinsService>();

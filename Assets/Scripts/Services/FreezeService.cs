@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using System;
+using Model;
 using UnityEngine;
 using View.Balls;
 
@@ -6,6 +7,8 @@ namespace Services
 {
     public class FreezeService : MonoBehaviour, IService
     {
+        public event Action OnFreeze;
+        
         private FreezeInfo _freezeInfo;
         private BallsManager _ballsManager;
 
@@ -35,6 +38,7 @@ namespace Services
             _currentTime = _freezeInfo.FreezeTime;
             IsEffectActive = true;
            _ballsManager.InvokeActionOnBall<Ball>(ball => ball.BallMove.StopMove());
+           OnFreeze?.Invoke();
         }
 
         private void EndFreeze()

@@ -4,18 +4,31 @@ namespace View.Balls
 {
     public class ColdBall : Ball
     {
-        private FreezeService _freeze;
-
+        private RotateBall _rotateAnimation;
         public override void OnInitialize()
         {
             base.OnInitialize();
-            _freeze = ServiceLocator.Instance.GetService<FreezeService>();
+            _rotateAnimation = GetComponent<RotateBall>();
+        }
+
+        public override void OnSetup()
+        {
+            base.OnSetup();
+            _rotateAnimation.StartAnimation();
+            FreezeService.OnFreeze += _rotateAnimation.StopAnimation;
         }
 
         private void OnMouseDown()
         {
-            _freeze.StartFreeze();
+            FreezeService.StartFreeze();
             DestroyBallByUser();
+        }
+
+        public override void OnReset()
+        {
+            base.OnReset();
+            FreezeService.OnFreeze -= _rotateAnimation.StopAnimation;
+            _rotateAnimation.ResetAnimation();
         }
 
         protected override void OnBallDestroy()
