@@ -3,7 +3,7 @@ using Services;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace View
+namespace View.UIViews
 {
     public class HealthView : MonoBehaviour
     {

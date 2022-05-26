@@ -23,7 +23,6 @@ namespace Controller.SpawnLogic
         {
             _spawnInfo = ConfigService.Instance.GetConfig<SpawnInfo>();
             _ballInfo = ConfigService.Instance.GetConfig<BallInfo>();
-            
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();

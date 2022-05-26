@@ -1,4 +1,5 @@
 ﻿using Controller.Pool;
+using DG.Tweening;
 using Services;
 using UnityEngine;
 using View.Balls;
@@ -46,10 +47,11 @@ namespace Controller.SpawnLogic
             return ball;
         }
 
-        private static void SetColor<T>(Color color, T ball) where T : Ball
+        private void SetColor<T>(Color color, T ball) where T : Ball
         {
             var renderer = ball.GetComponentInChildren<SpriteRenderer>();
             renderer.color = ball is BombBall || ball is ColdBall ? Color.white : color;
         }
+        
     }
 }

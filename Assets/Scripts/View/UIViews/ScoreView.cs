@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace View
+namespace View.UIViews
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class ScoreView : MonoBehaviour

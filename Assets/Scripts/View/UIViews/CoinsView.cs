@@ -1,9 +1,8 @@
-﻿using System;
-using Services;
+﻿using Services;
 using TMPro;
 using UnityEngine;
 
-namespace View
+namespace View.UIViews
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class CoinsView : MonoBehaviour

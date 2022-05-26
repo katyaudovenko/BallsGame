@@ -1,10 +1,7 @@
 ﻿using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
-using Unity.Mathematics;
 using UnityEngine;
 
-namespace View
+namespace View.Balls
 {
     public class RotateBall : MonoBehaviour
     {
