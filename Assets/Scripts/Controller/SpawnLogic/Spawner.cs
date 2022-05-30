@@ -50,8 +50,8 @@ namespace Controller.SpawnLogic
 
         private Vector2 GetBallPosition()
         {
-            var minInclusive = _spawnZoneSize.LeftBorder();
-            var maxInclusive = _spawnZoneSize.RightBorder();
+            var minInclusive = _spawnZoneSize.LeftBorder;
+            var maxInclusive = _spawnZoneSize.RightBorder;
             var x = Random.Range(minInclusive,maxInclusive);
             var ballPosition = new Vector2(x, transform.position.y);
             return ballPosition;
