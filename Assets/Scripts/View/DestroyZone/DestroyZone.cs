@@ -1,3 +1,4 @@
+using Model.Infos;
 using Services;
 using Services.ServiceLocator;
 using UnityEngine;
@@ -8,8 +9,11 @@ namespace View.DestroyZone
     public class DestroyZone : MonoBehaviour
     {
         private HealthService _healthService;
+        private HealthInfo _healthInfo;
+
         private void Start()
         {
+            _healthInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<HealthInfo>();
             _healthService = ServiceLocator.Instance.GetService<HealthService>();
         }
 
@@ -23,7 +27,7 @@ namespace View.DestroyZone
 
         private void DecreaseHealth()
         {
-            _healthService.Receive(1);
+            _healthService.Receive(_healthInfo.Damage);
             Debug.Log(_healthService.Health);
         }
         

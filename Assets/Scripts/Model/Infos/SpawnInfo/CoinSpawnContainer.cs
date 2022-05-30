@@ -3,19 +3,20 @@ using System.Linq;
 using Controller.SpawnLogic;
 using UnityEngine;
 
-namespace Model.Infos
+namespace Model.Infos.SpawnInfo
 {
     [CreateAssetMenu(fileName = "CoinSpawnInfo", menuName = "GamePlay/New CoinSpawnInfo")]
-    public class CoinSpawnInfo : ScriptableObject
+    public class CoinSpawnContainer : ScriptableObject
     {
         [SerializeField] private CoinSpawnConfig[] coinsInfo;
+        
         private Dictionary<BallType, CoinSpawnConfig> _configsMap;
         
         public CoinSpawnConfig GetConfig(BallType ballType)
         {
             if (_configsMap == null)
             {
-                _configsMap = coinsInfo.ToDictionary(c=> c.ballType, c => c);
+                _configsMap = coinsInfo.ToDictionary(c=> c.BallType, c => c);
             }
 
             return _configsMap[ballType];

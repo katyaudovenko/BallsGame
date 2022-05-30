@@ -7,6 +7,8 @@ namespace Model.Infos
     {
         [SerializeField] private int healthCount;
         public int HealthCount => healthCount;
-
+        
+        [SerializeField] private int damage;
+        public int Damage => damage;
     }
 }

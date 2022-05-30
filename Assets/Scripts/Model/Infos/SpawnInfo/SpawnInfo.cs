@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Model.Infos
+namespace Model.Infos.SpawnInfo
 {
     [CreateAssetMenu (fileName = "SpawnInfo", menuName = "GamePlay/New SpawnInfo")]
     public class SpawnInfo : ScriptableObject

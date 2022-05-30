@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Extensions;
-using Model;
 using Model.Infos;
+using Model.Infos.SpawnInfo;
 using Services;
 using Services.ServiceLocator;
 using UnityEngine;
@@ -42,7 +42,7 @@ namespace Controller.SpawnLogic
                 
                 yield return new WaitUntil(() => !_freezeService.IsEffectActive);
 
-                var type = _spawnInfo.SpawnObjects.GetRandomItem(config => config.chance).ballType;
+                var type = _spawnInfo.SpawnObjects.GetRandomItem(config => config.Chance).BallType;
                 var ball = _gameFactory.GetBall(type, GetBallPosition(), transform, _ballInfo.BallSize, _ballInfo.Color);
                 _ballsManager.AddBall(ball);
             }

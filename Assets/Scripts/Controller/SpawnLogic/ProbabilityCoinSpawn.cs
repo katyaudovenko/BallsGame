@@ -1,6 +1,7 @@
 ﻿using Extensions;
 using Model;
 using Model.Infos;
+using Model.Infos.SpawnInfo;
 using Services;
 using Services.ServiceLocator;
 using UnityEngine;
@@ -16,14 +17,14 @@ namespace Controller.SpawnLogic
 
         public void Initialize(BallType type)
         {
-            _coinSpawn = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<CoinSpawnInfo>().GetConfig(type);
+            _coinSpawn = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<CoinSpawnContainer>().GetConfig(type);
             _coinsService = ServiceLocator.Instance.GetService<CoinsService>();
         }
 
         public void SpawnCoin()
         {
-            if(RandomExtension.CheckProbability(_coinSpawn.chance,FullProgress))
-                _coinsService.AddCoin(_coinSpawn.costBall);
+            if(RandomExtension.CheckProbability(_coinSpawn.Chance,FullProgress))
+                _coinsService.AddCoin(_coinSpawn.CostBall);
         }
         
     }
