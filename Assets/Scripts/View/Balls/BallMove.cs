@@ -13,7 +13,7 @@ namespace View.Balls
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _info = ConfigService.Instance.GetConfig<BallInfo>();
+            _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
         }
 

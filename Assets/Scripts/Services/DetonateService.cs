@@ -16,7 +16,7 @@ namespace Services
         public DetonateService(BallsManager ballsManager)
         {
             _ballsManager = ballsManager;
-            _info = ConfigService.Instance.GetConfig<DetonateInfo>();
+            _info = _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<DetonateInfo>();;
         }
 
         public void PlanDetonate(Vector3 position)

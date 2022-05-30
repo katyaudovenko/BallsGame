@@ -9,18 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0967b0e35744219925d5b300b11194, type: 3}
-  m_Name: SpawnInfo
+  m_Script: {fileID: 11500000, guid: ed81c9fdc08a470186925654738d33af, type: 3}
+  m_Name: CoinSpawnInfo
   m_EditorClassIdentifier: 
-  timeSpawnDelay: 0.7
-  spawnObjects:
-  - chance: 50
+  coinsInfo:
+  - chance: 60
+    costBall: 1
     ballType: 0
-  - chance: 20
+  - chance: 70
+    costBall: 3
     ballType: 1
-  - chance: 10
+  - chance: 100
+    costBall: 5
     ballType: 2
-  - chance: 5
-    ballType: 3
-  - chance: 25.6
-    ballType: 4

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 808925005119531703}
   - component: {fileID: 34637085215661175}
   - component: {fileID: 442793430833872241}
+  - component: {fileID: 2798419867745069872}
   m_Layer: 6
   m_Name: CompositeBall
   m_TagString: Untagged
@@ -86,7 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bc89c8979d7a349881a8a8d61f510b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: e6361ddc1b76b5f4d8f8f7b36db4669f, type: 2}
 --- !u!114 &34637085215661175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +111,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbb19df589b4413b13af1aaf3dda1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  compositeBallInfo: {fileID: 11400000, guid: e6361ddc1b76b5f4d8f8f7b36db4669f, type: 2}
+--- !u!114 &2798419867745069872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808925005119531700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3b633b533845f592cfde6a028f14ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chance: 100
+  costBall: 3
 --- !u!1 &808925005976040600
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ namespace Services
         private void Start()
         {
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
-            _freezeInfo = ConfigService.Instance.GetConfig<FreezeInfo>();
+            _freezeInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<FreezeInfo>();;
         }
 
         private void Update()

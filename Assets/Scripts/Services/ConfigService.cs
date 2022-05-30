@@ -6,9 +6,6 @@ namespace Services
     {
         private const string ConfigPath = "Config";
         
-        private static ConfigService _instance;
-        public static ConfigService Instance => _instance ??= new ConfigService();
-        
         private readonly ScriptableObject[] _configs;
 
         public ConfigService()

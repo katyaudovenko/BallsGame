@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controller.SpawnLogic;
+using Model;
 using Services;
 using UnityEngine;
 
@@ -9,17 +10,21 @@ namespace View.Balls
         private BallInfo _info;
         private float _currentTime;
         private bool _isPressed;
+        private ProbabilityCoinSpawn _coinSpawn;
+        
 
         public override void OnInitialize()
         {
             base.OnInitialize();
-            _info = ConfigService.Instance.GetConfig<BallInfo>();
-            CostBall = 3;
+            _coinSpawn = GetComponent<ProbabilityCoinSpawn>();
+            _info = _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
+            _coinSpawn.Initialize(BallType.HeavyBall);
         }
 
         public override void OnSetup()
         {
             base.OnSetup();
+            OnDestroy += _coinSpawn.SpawnCoin;
             _currentTime = _info.TimeLifeHeavyBall;
             _isPressed = false;
         }
@@ -44,6 +49,12 @@ namespace View.Balls
         {
             _isPressed = false;
             BallMove.StartMove();
+        }
+
+        public override void OnReset()
+        {
+            base.OnReset();
+            OnDestroy -= _coinSpawn.SpawnCoin;
         }
 
         protected override void OnBallDestroy()

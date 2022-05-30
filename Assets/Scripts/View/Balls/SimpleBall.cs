@@ -1,20 +1,31 @@
-﻿namespace View.Balls
+﻿using Controller.SpawnLogic;
+
+namespace View.Balls
 {
     public class SimpleBall : Ball
     {
+        private ProbabilityCoinSpawn _coinSpawn;
         public override void OnInitialize()
         {
             base.OnInitialize();
-            CostBall = 1;
+            _coinSpawn = GetComponent<ProbabilityCoinSpawn>();
+            _coinSpawn.Initialize(BallType.SimpleBall);
         }
 
-        private void OnMouseDown()
+        public override void OnSetup()
         {
-            DestroyBallByUser();
+            base.OnSetup();
+            OnDestroy += _coinSpawn.SpawnCoin;
         }
-        protected override void OnBallDestroy()
+
+        private void OnMouseDown() => DestroyBallByUser();
+
+        public override void OnReset()
         {
-            Pool.ReturnElement(this);
+            base.OnReset();
+            OnDestroy -= _coinSpawn.SpawnCoin;
         }
+
+        protected override void OnBallDestroy() => Pool.ReturnElement(this);
     }
 }
