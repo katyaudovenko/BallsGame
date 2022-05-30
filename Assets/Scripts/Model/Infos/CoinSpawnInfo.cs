@@ -3,7 +3,7 @@ using System.Linq;
 using Controller.SpawnLogic;
 using UnityEngine;
 
-namespace Model
+namespace Model.Infos
 {
     [CreateAssetMenu(fileName = "CoinSpawnInfo", menuName = "GamePlay/New CoinSpawnInfo")]
     public class CoinSpawnInfo : ScriptableObject

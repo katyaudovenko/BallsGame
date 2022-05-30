@@ -1,4 +1,5 @@
 ﻿using System;
+using Services.ServiceLocator;
 
 namespace Services
 {
@@ -10,7 +11,7 @@ namespace Services
         private readonly ProgressService _progress;
         public CoinsService()
         {
-            _progress = ServiceLocator.Instance.GetService<ProgressService>();
+            _progress = ServiceLocator.ServiceLocator.Instance.GetService<ProgressService>();
             _progress.OnDataLoad += UpdateCoins;
         }
 

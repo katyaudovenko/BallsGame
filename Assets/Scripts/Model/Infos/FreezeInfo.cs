@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Model
+namespace Model.Infos
 {
     [CreateAssetMenu(fileName = "FreezeInfo", menuName = "GamePlay/New FreezeInfo")]
     public class FreezeInfo : ScriptableObject

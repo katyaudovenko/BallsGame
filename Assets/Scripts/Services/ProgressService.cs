@@ -1,5 +1,6 @@
 ﻿using System;
 using Model.Progress;
+using Services.ServiceLocator;
 using UnityEngine;
 
 namespace Services

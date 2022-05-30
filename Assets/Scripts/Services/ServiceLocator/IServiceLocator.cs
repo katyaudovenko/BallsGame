@@ -1,5 +1,5 @@
 ﻿
-namespace Services
+namespace Services.ServiceLocator
 {
     public interface IServiceLocator<TService>
     {

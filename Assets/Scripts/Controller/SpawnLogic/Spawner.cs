@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using Extensions;
 using Model;
+using Model.Infos;
 using Services;
+using Services.ServiceLocator;
 using UnityEngine;
 using View;
 using View.Balls;

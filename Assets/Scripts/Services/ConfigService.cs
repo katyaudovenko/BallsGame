@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Services.ServiceLocator;
+using UnityEngine;
 
 namespace Services
 {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Model
+namespace Model.Infos
 {
     [CreateAssetMenu(fileName = "DetonateInfo", menuName = "GamePlay/New DetonateInfo")]
     public class DetonateInfo : ScriptableObject

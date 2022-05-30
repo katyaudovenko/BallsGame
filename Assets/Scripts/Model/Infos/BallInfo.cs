@@ -1,7 +1,7 @@
 ﻿using Extensions;
 using UnityEngine;
 
-namespace Model
+namespace Model.Infos
 {
     [CreateAssetMenu(fileName = "BallInfo", menuName = "GamePlay/New BallInfo")]
     public class BallInfo : ScriptableObject

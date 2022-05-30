@@ -1,6 +1,8 @@
 ﻿using Extensions;
 using Model;
+using Model.Infos;
 using Services;
+using Services.ServiceLocator;
 using UnityEngine;
 
 namespace Controller.SpawnLogic

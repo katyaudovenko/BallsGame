@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.ServiceLocator;
 
 namespace View.Balls
 {

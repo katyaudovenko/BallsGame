@@ -1,5 +1,7 @@
 ﻿using System;
 using Model;
+using Model.Infos;
+using Services.ServiceLocator;
 using UnityEngine;
 using View.Balls;
 
@@ -17,8 +19,8 @@ namespace Services
 
         private void Start()
         {
-            _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
-            _freezeInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<FreezeInfo>();;
+            _ballsManager = ServiceLocator.ServiceLocator.Instance.GetService<BallsManager>();
+            _freezeInfo = ServiceLocator.ServiceLocator.Instance.GetService<ConfigService>().GetConfig<FreezeInfo>();;
         }
 
         private void Update()
