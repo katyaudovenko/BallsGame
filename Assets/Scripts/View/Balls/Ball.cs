@@ -23,11 +23,14 @@ namespace View.Balls
 
         public virtual void OnInitialize()
         {
-            BallMove = GetComponent<BallMove>();
             FreezeService = ServiceLocator.Instance.GetService<FreezeService>();
             _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
+            
+            BallMove = GetComponent<BallMove>();
+            BallMove.OnInitialize();
         }
+        
 
         public void DestroyBallByUser()
         {
@@ -41,8 +44,11 @@ namespace View.Balls
             _ballsManager.RemoveBall(this);
             OnBallDestroy();
         }
-        
-        public virtual void OnSetup() { }
+
+        public virtual void OnSetup()
+        {
+            BallMove.OnSetup();
+        }
 
         public virtual void OnReset() { }
         

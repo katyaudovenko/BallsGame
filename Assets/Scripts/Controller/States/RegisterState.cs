@@ -26,16 +26,17 @@ namespace Controller.States
         private void RegisterServices()
         {
             var config = ServiceLocator.Instance.Register(new ConfigService());
-            
+
             ServiceLocator.Instance.Register(new ProgressService());
             ServiceLocator.Instance.Register(new ScoreService());
             ServiceLocator.Instance.Register(new BallsManager());
-            ServiceLocator.Instance.Register(new GameFactory());
 
-            RegisterCoinsService();
             RegisterFreezeService();
+            RegisterCoinsService();
             RegisterDetonateService();
             RegisterHealthService(config);
+            
+            ServiceLocator.Instance.Register(new GameFactory());
         }
 
         private void RegisterCoinsService()
@@ -48,6 +49,9 @@ namespace Controller.States
         {
             var prefab = Resources.Load<FreezeService>(FreezeContainerPath);
             var service = Object.Instantiate(prefab);
+            var freezeInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<FreezeInfo>();
+            var ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
+            service.Initialize(ballsManager, freezeInfo);
             ServiceLocator.Instance.Register(service);
         }
 

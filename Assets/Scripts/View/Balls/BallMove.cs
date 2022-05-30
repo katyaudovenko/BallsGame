@@ -12,14 +12,14 @@ namespace View.Balls
         private Rigidbody2D _rigidbody2D;
         private FreezeService _freezeService;
 
-        private void Awake()
+        public void OnInitialize()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
         }
 
-        private void OnEnable()
+        public void OnSetup()
         {
             StartMove();
         }

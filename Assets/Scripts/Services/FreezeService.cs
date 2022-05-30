@@ -17,10 +17,10 @@ namespace Services
         private float _currentTime;
         public bool IsEffectActive { get; private set; }
 
-        private void Start()
+        public void Initialize(BallsManager ballsManager, FreezeInfo freezeInfo)
         {
-            _ballsManager = ServiceLocator.ServiceLocator.Instance.GetService<BallsManager>();
-            _freezeInfo = ServiceLocator.ServiceLocator.Instance.GetService<ConfigService>().GetConfig<FreezeInfo>();;
+            _ballsManager = ballsManager;
+            _freezeInfo = freezeInfo;
         }
 
         private void Update()
