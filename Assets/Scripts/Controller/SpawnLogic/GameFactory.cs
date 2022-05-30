@@ -30,9 +30,9 @@ namespace Controller.SpawnLogic
                 case BallType.HeavyBall:
                     return CreateBall<HeavyBall>(position, parent, scale, color);
                 case BallType.ColdBall:
-                    return CreateBall<ColdBall>(position, parent, scale, color);
+                    return CreateBall<ColdBall>(position, parent, scale, Color.white);
                 case BallType.BombBall:
-                    return CreateBall<BombBall>(position, parent, scale, color);
+                    return CreateBall<BombBall>(position, parent, scale, Color.white);
             }
             return null;
         }
@@ -42,16 +42,16 @@ namespace Controller.SpawnLogic
             var ball = _poolContainer.GetFreeElement<T>();
             ball.transform.position = position;
             ball.transform.localScale = scale;
-            SetColor(color, ball);
+            SetColor(ball, color);
             ball.transform.SetParent(parent);
             ball.SetupPool(_poolContainer);
             return ball;
         }
 
-        private void SetColor<T>(Color color, T ball) where T : Ball
+        private void SetColor(Ball ball, Color color)
         {
             var renderer = ball.GetComponentInChildren<SpriteRenderer>();
-            renderer.color = ball is BombBall || ball is ColdBall ? Color.white : color;
+            renderer.color = color;
         }
         
     }

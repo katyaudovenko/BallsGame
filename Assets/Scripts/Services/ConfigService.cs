@@ -1,4 +1,7 @@
-﻿using Services.ServiceLocator;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Services.ServiceLocator;
 using UnityEngine;
 
 namespace Services
@@ -7,22 +10,19 @@ namespace Services
     {
         private const string ConfigPath = "Config";
         
-        private readonly ScriptableObject[] _configs;
-
+        private readonly Dictionary<Type, ScriptableObject> _configs;
+        
         public ConfigService()
         {
-            _configs = Resources.LoadAll<ScriptableObject>(ConfigPath);
+            _configs = Resources
+                .LoadAll<ScriptableObject>(ConfigPath)
+                .ToDictionary(so=> so.GetType(), so=>so);
         }
         
         public T GetConfig<T>() where T : ScriptableObject
         {
-            foreach (var config in _configs)
-            {
-                if (config is T scriptableObject)
-                {
-                    return scriptableObject;
-                }
-            }
+            if (_configs.TryGetValue(typeof(T), out var config))
+                return config as T;
 
             return null;
         }

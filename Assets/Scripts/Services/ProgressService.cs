@@ -21,14 +21,9 @@ namespace Services
         public void Load()
         {
             var json = PlayerPrefs.GetString(PlayerProgressKey, "");
-            if (String.IsNullOrEmpty(json))
-            {
-                Progress = new ProgressData();
-            }
-            else
-            {
-                Progress = JsonUtility.FromJson<ProgressData>(json);
-            }
+            Progress = string.IsNullOrEmpty(json)
+                ? new ProgressData() 
+                : JsonUtility.FromJson<ProgressData>(json);
             OnDataLoad?.Invoke();
         }
     }

@@ -1,5 +1,4 @@
 ﻿using Controller.SpawnLogic;
-using Model;
 using Model.Infos;
 using Services;
 using Services.ServiceLocator;
@@ -26,16 +25,23 @@ namespace Controller.States
         
         private void RegisterServices()
         {
+            var config = ServiceLocator.Instance.Register(new ConfigService());
+            
             ServiceLocator.Instance.Register(new ProgressService());
             ServiceLocator.Instance.Register(new ScoreService());
-            ServiceLocator.Instance.Register(new CoinsService());
-            var config = ServiceLocator.Instance.Register(new ConfigService());
-            var ballsManager = ServiceLocator.Instance.Register(new BallsManager());
-            RegisterFreezeService();
-            ServiceLocator.Instance.Register(new DetonateService(ballsManager));
+            ServiceLocator.Instance.Register(new BallsManager());
             ServiceLocator.Instance.Register(new GameFactory());
-            var healthInfo = config.GetConfig<HealthInfo>();
-            ServiceLocator.Instance.Register(new HealthService(healthInfo.HealthCount));
+
+            RegisterCoinsService();
+            RegisterFreezeService();
+            RegisterDetonateService();
+            RegisterHealthService(config);
+        }
+
+        private void RegisterCoinsService()
+        {
+            var progressService = ServiceLocator.Instance.GetService<ProgressService>();
+            ServiceLocator.Instance.Register(new CoinsService(progressService));
         }
 
         private void RegisterFreezeService()
@@ -43,6 +49,18 @@ namespace Controller.States
             var prefab = Resources.Load<FreezeService>(FreezeContainerPath);
             var service = Object.Instantiate(prefab);
             ServiceLocator.Instance.Register(service);
+        }
+
+        private void RegisterDetonateService()
+        {
+            var ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
+            ServiceLocator.Instance.Register(new DetonateService(ballsManager));
+        }
+
+        private void RegisterHealthService(ConfigService config)
+        {
+            var healthInfo = config.GetConfig<HealthInfo>();
+            ServiceLocator.Instance.Register(new HealthService(healthInfo));
         }
     }
 }

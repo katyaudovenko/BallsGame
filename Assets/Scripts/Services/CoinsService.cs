@@ -9,9 +9,9 @@ namespace Services
         public int Coins { get; private set; }
 
         private readonly ProgressService _progress;
-        public CoinsService()
+        public CoinsService(ProgressService progressService)
         {
-            _progress = ServiceLocator.ServiceLocator.Instance.GetService<ProgressService>();
+            _progress = progressService;
             _progress.OnDataLoad += UpdateCoins;
         }
 

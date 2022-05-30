@@ -1,4 +1,5 @@
 ﻿using System;
+using Model.Infos;
 using Services.ServiceLocator;
 
 namespace Services
@@ -7,9 +8,9 @@ namespace Services
     {
         public event Action OnChanged;
         public int Health { get; private set; }
-        public HealthService(int health)
+        public HealthService(HealthInfo health)
         {
-            Health = health;
+            Health = health.HealthCount;
         }
         
         public void Receive(int value)

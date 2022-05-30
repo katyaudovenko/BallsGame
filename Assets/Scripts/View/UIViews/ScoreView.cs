@@ -14,7 +14,7 @@ namespace View.UIViews
         {
             _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
             _scoreText = GetComponent<TextMeshProUGUI>();
-            _scoreService.OnAddScore += UpdateScoreText;
+            _scoreService.OnChanged += UpdateScoreText;
         }
 
         private void UpdateScoreText()
