@@ -1,5 +1,4 @@
 ﻿using Controller.SpawnLogic;
-using Model;
 using Model.Infos;
 using Services;
 using Services.ServiceLocator;
@@ -9,30 +8,41 @@ namespace View.Balls
 {
     public class HeavyBall : Ball
     {
+        private bool _markToDestroy;
+        
         private BallInfo _info;
+        private ProbabilityCoinSpawn _coinSpawn;
+        private DestroyBall _destroyAnimation;
+        
         private float _currentTime;
         private bool _isPressed;
-        private ProbabilityCoinSpawn _coinSpawn;
-        
+
 
         public override void OnInitialize()
         {
             base.OnInitialize();
+            _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
+            
             _coinSpawn = GetComponent<ProbabilityCoinSpawn>();
-            _info = _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
             _coinSpawn.Initialize(BallType.HeavyBall);
+
+            _destroyAnimation = GetComponent<DestroyBall>();
+            _destroyAnimation.Initialize();
         }
 
         public override void OnSetup()
         {
             base.OnSetup();
-            OnDestroy += _coinSpawn.SpawnCoin;
+            
             _currentTime = _info.TimeLifeHeavyBall;
             _isPressed = false;
+            _markToDestroy = false;
         }
 
         private void Update()
         {
+            if(_markToDestroy) return;
+            
             if (_isPressed)
             {
                 _currentTime -= Time.deltaTime;
@@ -43,12 +53,16 @@ namespace View.Balls
 
         private void OnMouseDown()
         {
+            if (_markToDestroy) return;
+            
             _isPressed = true;
             BallMove.StopMove();
         }
 
         private void OnMouseUp()
         {
+            if(_markToDestroy) return;
+            
             _isPressed = false;
             BallMove.StartMove();
         }
@@ -56,12 +70,17 @@ namespace View.Balls
         public override void OnReset()
         {
             base.OnReset();
-            OnDestroy -= _coinSpawn.SpawnCoin;
+            _destroyAnimation.ResetAnimation();
         }
 
         protected override void OnBallDestroy()
         {
-            Pool.ReturnElement(this);
+            _destroyAnimation.StartAnimation(() =>
+            {
+                Pool.ReturnElement(this);
+                _coinSpawn.SpawnCoin();
+            });
+            _markToDestroy = true;
         }
     }
 }

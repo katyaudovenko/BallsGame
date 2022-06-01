@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1712410980892700699}
-  - component: {fileID: 1712410980892700698}
   - component: {fileID: 1712410980892700697}
+  - component: {fileID: 1190619846898919337}
+  - component: {fileID: 1712410980892700698}
   - component: {fileID: 8199817360824754937}
   - component: {fileID: 8656436161647123164}
-  - component: {fileID: 1190619846898919337}
   - component: {fileID: 7324444005187723101}
+  - component: {fileID: 8832149784764667689}
   m_Layer: 6
   m_Name: HeavyBall
   m_TagString: Untagged
@@ -34,22 +35,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5889519080737304848}
-  - {fileID: 7604731194448841448}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1712410980892700698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712410980892700696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4bc89c8979d7a349881a8a8d61f510b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1712410980892700697
 Rigidbody2D:
   serializedVersion: 4
@@ -71,6 +59,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &1190619846898919337
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712410980892700696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.548123
+--- !u!114 &1712410980892700698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712410980892700696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc89c8979d7a349881a8a8d61f510b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8199817360824754937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,22 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c24d8a64dcc4c7d9d8a27f0f9c83568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &1190619846898919337
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712410980892700696}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &7324444005187723101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,8 +123,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f3b633b533845f592cfde6a028f14ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chance: 100
-  costBall: 5
+--- !u!114 &8832149784764667689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712410980892700696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc338c1eda734a059c922b48fe677a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2398182888774496989
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,8 +163,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children: []
-  m_Father: {fileID: 1712410980892700699}
-  m_RootOrder: 1
+  m_Father: {fileID: 5889519080737304848}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3506240743828943795
 SpriteRenderer:
@@ -197,7 +207,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.6792453, g: 0.36781773, b: 0.36781773, a: 1}
+  m_Color: {r: 0.9622642, g: 0.93566763, b: 0.40306157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -234,7 +244,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7604731194448841448}
   m_Father: {fileID: 1712410980892700699}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

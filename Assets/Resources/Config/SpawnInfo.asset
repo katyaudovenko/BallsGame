@@ -20,7 +20,7 @@ MonoBehaviour:
     ballType: 1
   - chance: 10
     ballType: 2
-  - chance: 5
+  - chance: 3
     ballType: 3
-  - chance: 25.6
+  - chance: 4
     ballType: 4

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: HealthInfo
   m_EditorClassIdentifier: 
   healthCount: 3
+  damage: 1

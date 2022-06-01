@@ -8,8 +8,6 @@ namespace View.Balls
 {
     public abstract class Ball : PoolObject, IPoolBehaviour
     {
-        protected event Action OnDestroy;
-        
         private const int BasicNumberScore = 1;
         
         private BallsManager _ballsManager;
@@ -33,10 +31,9 @@ namespace View.Balls
         
 
         public void DestroyBallByUser()
-        {
-           _scoreService.AddScore(BasicNumberScore);
-           OnDestroy?.Invoke();
-           DestroyBall();
+        { 
+            _scoreService.AddScore(BasicNumberScore);
+            DestroyBall();
         }
         
         public void DestroyBall()
