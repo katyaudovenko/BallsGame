@@ -1,7 +1,9 @@
 ﻿using Services;
 using Services.ServiceLocator;
+using View.Balls.Abstract;
+using View.Balls.Components;
 
-namespace View.Balls
+namespace View.Balls.Behaviour
 {
     public class BombBall : Ball
     {
@@ -36,7 +38,7 @@ namespace View.Balls
         protected override void OnBallDestroy()
         {
             _detonateService.PlanDetonate(transform.position);
-            Pool.ReturnElement(this);
+            BallDestroyBehaviour.OnDestroyBall(this);
         }
     }
 }

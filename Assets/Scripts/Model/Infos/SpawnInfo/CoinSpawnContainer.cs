@@ -19,7 +19,11 @@ namespace Model.Infos.SpawnInfo
                 _configsMap = coinsInfo.ToDictionary(c=> c.BallType, c => c);
             }
 
-            return _configsMap[ballType];
+            if (_configsMap.TryGetValue(ballType, out var config))
+                return config;
+            
+            Debug.LogError($"Key not found {ballType}");
+            return null;
         }
     }
 }

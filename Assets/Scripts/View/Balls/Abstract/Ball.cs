@@ -1,10 +1,12 @@
 ﻿using System;
+using Controller;
 using Controller.Pool;
 using Services;
 using Services.ServiceLocator;
+using View.Balls.Components;
+using View.Balls.Destroy;
 
-
-namespace View.Balls
+namespace View.Balls.Abstract
 {
     public abstract class Ball : PoolObject, IPoolBehaviour
     {
@@ -12,12 +14,19 @@ namespace View.Balls
         
         private BallsManager _ballsManager;
         private ScoreService _scoreService;
+        private IBallComponent[] _ballComponents;
+        private PoolContainer _pool;
 
         protected FreezeService FreezeService;
-        protected PoolContainer Pool;
+        protected IBallDestroy BallDestroyBehaviour;
+
         public BallMove BallMove { get; private set; }
 
-        public void SetupPool(PoolContainer pool) => Pool = pool;
+        public void SetupPool(PoolContainer pool)
+        {
+            _pool = pool;
+            BallDestroyBehaviour.SetupPool(_pool);
+        }
 
         public virtual void OnInitialize()
         {
@@ -26,9 +35,10 @@ namespace View.Balls
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             
             BallMove = GetComponent<BallMove>();
-            BallMove.OnInitialize();
+            BallDestroyBehaviour = GetComponent<IBallDestroy>();
+            
+            InvokeComponent<IBallComponent>(c=> c.OnInitialize());
         }
-        
 
         public void DestroyBallByUser()
         { 
@@ -42,13 +52,23 @@ namespace View.Balls
             OnBallDestroy();
         }
 
-        public virtual void OnSetup()
-        {
-            BallMove.OnSetup();
-        }
+        public virtual void OnSetup() => 
+            InvokeComponent<IBallComponent>(c=> c.OnSetup());
 
-        public virtual void OnReset() { }
+        public virtual void OnReset() =>
+            InvokeComponent<IBallComponent>(c => c.OnReset());
         
         protected abstract void OnBallDestroy();
+
+        private void InvokeComponent<T>(Action<T> action) where T : IBallComponent
+        {
+            _ballComponents ??= GetComponents<IBallComponent>();
+
+            foreach (var ballComponent in _ballComponents)
+            {
+                var component = (T) ballComponent;
+                action(component);
+            }
+        }
     }
 }

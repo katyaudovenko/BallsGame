@@ -1,15 +1,13 @@
-﻿using Controller.SpawnLogic;
-using Model.Infos;
+﻿using Model.Infos;
 using Services;
 using Services.ServiceLocator;
+using View.Balls.Abstract;
 
-namespace View.Balls
+namespace View.Balls.Behaviour
 {
     public class CompositeBall : Ball
     {
         private BallInfo _info;
-        private ProbabilityCoinSpawn _coinSpawn;
-        private DestroyBall _destroyAnimation;
         private int _livesCount;
 
         public override void OnInitialize()
@@ -17,12 +15,6 @@ namespace View.Balls
             base.OnInitialize();
             
             _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
-
-            _coinSpawn = GetComponent<ProbabilityCoinSpawn>();
-            _coinSpawn.Initialize(BallType.CompositeBall);
-            
-            _destroyAnimation = GetComponent<DestroyBall>();
-            _destroyAnimation.Initialize();
         }
 
         public override void OnSetup()
@@ -45,11 +37,7 @@ namespace View.Balls
         
         protected override void OnBallDestroy()
         {
-            _destroyAnimation.StartAnimation(() =>
-            {
-                Pool.ReturnElement(this);
-                _coinSpawn.SpawnCoin();
-            });
+           BallDestroyBehaviour.OnDestroyBall(this);
         }
     }
 }

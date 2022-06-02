@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Services.ServiceLocator;
+using View.Balls.Abstract;
 
-namespace View.Balls
+namespace Controller
 {
     public class BallsManager : IService
     {

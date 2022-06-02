@@ -1,12 +1,12 @@
-using Model;
 using Model.Infos;
 using Services;
 using Services.ServiceLocator;
 using UnityEngine;
+using View.Balls.Abstract;
 
-namespace View.Balls
+namespace View.Balls.Components
 {
-    public class BallMove : MonoBehaviour
+    public class BallMove : MonoBehaviour, IBallComponent
     {
         private BallInfo _info;
         private Rigidbody2D _rigidbody2D;
@@ -19,10 +19,10 @@ namespace View.Balls
             _freezeService = ServiceLocator.Instance.GetService<FreezeService>();
         }
 
-        public void OnSetup()
-        {
+        public void OnSetup() => 
             StartMove();
-        }
+
+        public void OnReset() { }
 
         public void StartMove()
         {

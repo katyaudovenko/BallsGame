@@ -1,6 +1,7 @@
-﻿using Services;
+﻿using View.Balls.Abstract;
+using View.Balls.Components;
 
-namespace View.Balls
+namespace View.Balls.Behaviour
 {
     public class ColdBall : Ball
     {
@@ -31,10 +32,6 @@ namespace View.Balls
             _rotateAnimation.ResetAnimation();
         }
 
-        protected override void OnBallDestroy()
-        {
-            Pool.ReturnElement(this);
-        }
-            
+        protected override void OnBallDestroy() => BallDestroyBehaviour.OnDestroyBall(this);
     }
 }

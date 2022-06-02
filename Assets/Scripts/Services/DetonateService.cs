@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using Controller;
 using Model.Infos;
 using Services.ServiceLocator;
 using UnityEngine;
-using View.Balls;
+using View.Balls.Abstract;
 
 namespace Services
 {
@@ -18,7 +18,7 @@ namespace Services
         public DetonateService(BallsManager ballsManager)
         {
             _ballsManager = ballsManager;
-            _info = _info = ServiceLocator.ServiceLocator.Instance.GetService<ConfigService>().GetConfig<DetonateInfo>();;
+            _info = _info = ServiceLocator.ServiceLocator.Instance.GetService<ConfigService>().GetConfig<DetonateInfo>();
         }
 
         public void PlanDetonate(Vector3 position)

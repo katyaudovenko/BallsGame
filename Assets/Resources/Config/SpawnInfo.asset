@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeSpawnDelay: 0.7
   spawnObjects:
-  - chance: 50
+  - chance: 70
     ballType: 0
   - chance: 20
     ballType: 1

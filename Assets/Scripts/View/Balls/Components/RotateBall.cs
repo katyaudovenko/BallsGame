@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace View.Balls
+namespace View.Balls.Components
 {
     public class RotateBall : MonoBehaviour
     {

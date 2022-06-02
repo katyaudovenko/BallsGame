@@ -1,19 +1,15 @@
-﻿using Controller.SpawnLogic;
-using Model.Infos;
+﻿using Model.Infos;
 using Services;
 using Services.ServiceLocator;
 using UnityEngine;
+using View.Balls.Abstract;
 
-namespace View.Balls
+namespace View.Balls.Behaviour
 {
     public class HeavyBall : Ball
     {
-        private bool _markToDestroy;
-        
         private BallInfo _info;
-        private ProbabilityCoinSpawn _coinSpawn;
-        private DestroyBall _destroyAnimation;
-        
+        private bool _markToDestroy;
         private float _currentTime;
         private bool _isPressed;
 
@@ -21,13 +17,8 @@ namespace View.Balls
         public override void OnInitialize()
         {
             base.OnInitialize();
-            _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
             
-            _coinSpawn = GetComponent<ProbabilityCoinSpawn>();
-            _coinSpawn.Initialize(BallType.HeavyBall);
-
-            _destroyAnimation = GetComponent<DestroyBall>();
-            _destroyAnimation.Initialize();
+            _info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
         }
 
         public override void OnSetup()
@@ -66,20 +57,10 @@ namespace View.Balls
             _isPressed = false;
             BallMove.StartMove();
         }
-
-        public override void OnReset()
-        {
-            base.OnReset();
-            _destroyAnimation.ResetAnimation();
-        }
-
+        
         protected override void OnBallDestroy()
         {
-            _destroyAnimation.StartAnimation(() =>
-            {
-                Pool.ReturnElement(this);
-                _coinSpawn.SpawnCoin();
-            });
+            BallDestroyBehaviour.OnDestroyBall(this);
             _markToDestroy = true;
         }
     }
