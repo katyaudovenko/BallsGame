@@ -1,18 +1,19 @@
 ﻿using Controller.Pool;
 using Services.ServiceLocator;
 using UnityEngine;
-using View.Balls;
 using View.Balls.Abstract;
 using View.Balls.Behaviour;
+using View.Balls.Components;
 
 namespace Controller.SpawnLogic
 {
     public class GameFactory : IService
     {
         private const string PoolContainerPath = "Prefabs/PoolContainer";
-        private readonly PoolContainer _poolContainer;
+
+        private PoolContainer _poolContainer;
         
-        public GameFactory()
+        public void Initialize()
         {
             var prefab = Resources.Load<PoolContainer>(PoolContainerPath);
             _poolContainer = Object.Instantiate(prefab);
@@ -37,6 +38,13 @@ namespace Controller.SpawnLogic
             return null;
         }
 
+        public FrostEffect CreateFrostEffect()
+        {
+            var effect = _poolContainer.GetFreeElement<FrostEffect>();
+            effect.SetupPool(_poolContainer);
+            return effect;
+        }
+        
         private T CreateBall<T>(Vector2 position, Transform parent, Vector3 scale, Color color) where T : Ball
         {
             var ball = _poolContainer.GetFreeElement<T>();

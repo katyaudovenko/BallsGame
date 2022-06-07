@@ -3,7 +3,6 @@ using Model.Infos;
 using Services;
 using Services.ServiceLocator;
 using UnityEngine;
-using View.Balls;
 
 
 namespace Controller.States
@@ -20,9 +19,15 @@ namespace Controller.States
         public override void Enter()
         {
             base.Enter();
+            InitializeServices();
             _stateMachine.ChangeState<LoadDataState>();
         }
-        
+
+        private void InitializeServices()
+        {
+            ServiceLocator.Instance.GetService<GameFactory>().Initialize();
+        }
+
         private void RegisterServices()
         {
             var config = ServiceLocator.Instance.Register(new ConfigService());
@@ -30,13 +35,12 @@ namespace Controller.States
             ServiceLocator.Instance.Register(new ProgressService());
             ServiceLocator.Instance.Register(new ScoreService());
             ServiceLocator.Instance.Register(new BallsManager());
+            ServiceLocator.Instance.Register(new GameFactory());
 
-            RegisterFreezeService();
             RegisterCoinsService();
             RegisterDetonateService();
             RegisterHealthService(config);
-            
-            ServiceLocator.Instance.Register(new GameFactory());
+            RegisterFreezeService();
         }
 
         private void RegisterCoinsService()
@@ -51,7 +55,8 @@ namespace Controller.States
             var service = Object.Instantiate(prefab);
             var freezeInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<FreezeInfo>();
             var ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
-            service.Initialize(ballsManager, freezeInfo);
+            var gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
+            service.Construct(ballsManager, freezeInfo, gameFactory);
             ServiceLocator.Instance.Register(service);
         }
 

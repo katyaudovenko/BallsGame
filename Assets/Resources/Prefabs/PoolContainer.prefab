@@ -44,13 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolsInfo:
-  - Count: 3
-    Prefab: {fileID: 3603791024822294399, guid: 3062ea234269a444e91194448c4ec13a, type: 3}
-  - Count: 3
-    Prefab: {fileID: 34637085215661175, guid: 447accfa2b1da524b95a4c0955217eef, type: 3}
-  - Count: 3
-    Prefab: {fileID: 8199817360824754937, guid: 79b542374682336408e064d71a437327, type: 3}
-  - Count: 3
-    Prefab: {fileID: 2195347141334434261, guid: 92b26e712a364db4fbd6e665f7c7b591, type: 3}
-  - Count: 3
-    Prefab: {fileID: 3396875629427855942, guid: a3003b0ed2aa57f428cc0e2b64193ff2, type: 3}
+  - count: 5
+    prefab: {fileID: 2968979180584633519, guid: 3062ea234269a444e91194448c4ec13a, type: 3}
+  - count: 5
+    prefab: {fileID: 34637085215661175, guid: 447accfa2b1da524b95a4c0955217eef, type: 3}
+  - count: 5
+    prefab: {fileID: 8199817360824754937, guid: 79b542374682336408e064d71a437327, type: 3}
+  - count: 5
+    prefab: {fileID: 7604533451404814454, guid: 92b26e712a364db4fbd6e665f7c7b591, type: 3}
+  - count: 5
+    prefab: {fileID: 3396875629427855942, guid: a3003b0ed2aa57f428cc0e2b64193ff2, type: 3}
+  - count: 1
+    prefab: {fileID: 2868146273849284960, guid: 92ff402e4b8bfcc40907fa0c24773879, type: 3}

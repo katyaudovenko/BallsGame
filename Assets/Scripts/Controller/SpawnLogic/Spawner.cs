@@ -6,7 +6,6 @@ using Services;
 using Services.ServiceLocator;
 using UnityEngine;
 using View;
-using View.Balls;
 using Random = UnityEngine.Random;
 // ReSharper disable IteratorNeverReturns
 

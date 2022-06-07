@@ -14,8 +14,8 @@ namespace Controller.Pool
         {
             foreach (var poolInfo in poolsInfo)
             {
-                var type = poolInfo.Prefab.Behaviour.GetType();
-                var pool = new ObjectsPool(poolInfo.Prefab, poolInfo.Count, CreateContainer(type.Name));
+                var type = poolInfo.prefab.Behaviour.GetType();
+                var pool = new ObjectsPool(poolInfo.prefab, poolInfo.count, CreateContainer(type.Name));
                 _poolsMap.Add(type, pool);
             }
         }
