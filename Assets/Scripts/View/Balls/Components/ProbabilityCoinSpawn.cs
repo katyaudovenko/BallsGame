@@ -5,6 +5,7 @@ using Services;
 using Services.ServiceLocator;
 using UnityEngine;
 using View.Balls.Abstract;
+using View.Balls.Destroy;
 
 namespace View.Balls.Components
 {
@@ -16,18 +17,26 @@ namespace View.Balls.Components
         
         private CoinSpawnConfig _coinSpawn;
         private CoinsService _coinsService;
+        private CommonBallDestroy _commonBallDestroy;
 
         public void OnInitialize()
         {
             _coinSpawn = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<CoinSpawnContainer>().GetConfig(ballType);
             _coinsService = ServiceLocator.Instance.GetService<CoinsService>();
+            _commonBallDestroy = GetComponent<CommonBallDestroy>();
         }
 
-        public void OnSetup() { }
+        public void OnSetup()
+        {
+            _commonBallDestroy.OnDestroyByUser += SpawnCoin;
+        }
 
-        public void OnReset() { }
+        public void OnReset()
+        {
+            _commonBallDestroy.OnDestroyByUser -= SpawnCoin;
+        }
 
-        public void SpawnCoin()
+        private void SpawnCoin()
         {
             if(RandomExtension.CheckProbability(_coinSpawn.Chance,FullProgress))
                 _coinsService.AddCoin(_coinSpawn.CostBall);

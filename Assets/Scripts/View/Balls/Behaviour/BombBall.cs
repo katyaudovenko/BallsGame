@@ -40,5 +40,8 @@ namespace View.Balls.Behaviour
             _detonateService.PlanDetonate(transform.position);
             BallDestroyBehaviour.OnDestroyBall(this);
         }
+
+        public override void DestroyBallByUser() => 
+            OnBallDestroy();
     }
 }

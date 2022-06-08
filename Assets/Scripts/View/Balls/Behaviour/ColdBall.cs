@@ -7,9 +7,13 @@ namespace View.Balls.Behaviour
         private void OnMouseDown()
         {
             FreezeService.StartFreeze();
-            DestroyBallByUser();
+            OnBallDestroy();
         }
         
-        protected override void OnBallDestroy() => BallDestroyBehaviour.OnDestroyBall(this);
+        protected override void OnBallDestroy() => 
+            BallDestroyBehaviour.OnDestroyBall(this);
+
+        public override void DestroyBallByUser() => 
+            BallDestroyBehaviour.OnDestroyBallByUser(this);
     }
 }

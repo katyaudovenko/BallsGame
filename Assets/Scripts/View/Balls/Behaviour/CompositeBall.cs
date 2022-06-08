@@ -23,21 +23,20 @@ namespace View.Balls.Behaviour
             _livesCount = _info.LivesCountCompositeBall;
         }
         
-        private void OnMouseDown()
-        {
+        private void OnMouseDown() => 
             Damage();
-        }
-        
+
         private void Damage()
         {
             _livesCount--;
-            if (_livesCount <= 0) 
-                DestroyBallByUser();
+            if (_livesCount <= 0)
+               DestroyBallByUser();
         }
-        
-        protected override void OnBallDestroy()
-        {
-           BallDestroyBehaviour.OnDestroyBall(this);
-        }
+
+        public override void DestroyBallByUser() => 
+            BallDestroyBehaviour.OnDestroyBallByUser(this);
+
+        protected override void OnBallDestroy() => 
+            BallDestroyBehaviour.OnDestroyBall(this);
     }
 }

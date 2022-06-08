@@ -2,7 +2,6 @@ using Model.Infos;
 using Services;
 using Services.ServiceLocator;
 using UnityEngine;
-using View.Balls;
 using View.Balls.Abstract;
 
 namespace View.DestroyZone
@@ -24,7 +23,7 @@ namespace View.DestroyZone
             DecreaseHealth();
         }
 
-        private static void DestroyBall(Collider2D ballCollider) => ballCollider.GetComponent<Ball>().DestroyBall();
+        private static void DestroyBall(Collider2D ballCollider) => ballCollider.GetComponent<Ball>().DestroyBallByZone();
 
         private void DecreaseHealth()
         {

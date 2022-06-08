@@ -1,5 +1,4 @@
 ﻿using System;
-using Controller;
 using Controller.Pool;
 using Services;
 using Services.ServiceLocator;
@@ -10,12 +9,9 @@ namespace View.Balls.Abstract
 {
     public abstract class Ball : PoolObject, IPoolBehaviour
     {
-        private const int BasicNumberScore = 1;
-        
-        private BallsManager _ballsManager;
-        private ScoreService _scoreService;
         private IBallComponent[] _ballComponents;
         private PoolContainer _pool;
+        private ScoreService _scoreService;
 
         protected FreezeService FreezeService;
         protected IBallDestroy BallDestroyBehaviour;
@@ -32,32 +28,29 @@ namespace View.Balls.Abstract
         {
             FreezeService = ServiceLocator.Instance.GetService<FreezeService>();
             _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
-            _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
-            
+
             BallMove = GetComponent<BallMove>();
             BallDestroyBehaviour = GetComponent<IBallDestroy>();
             
             InvokeComponent<IBallComponent>(c=> c.OnInitialize());
         }
 
-        public void DestroyBallByUser()
-        { 
-            _scoreService.AddScore(BasicNumberScore);
-            DestroyBall();
-        }
-        
-        public void DestroyBall()
+        public virtual void OnSetup()
         {
-            _ballsManager.RemoveBall(this);
-            OnBallDestroy();
+            InvokeComponent<IBallComponent>(c => c.OnSetup());
+            BallDestroyBehaviour.OnDestroyByUser += AddScore;
         }
 
-        public virtual void OnSetup() => 
-            InvokeComponent<IBallComponent>(c=> c.OnSetup());
-
-        public virtual void OnReset() =>
+        public virtual void OnReset()
+        {
             InvokeComponent<IBallComponent>(c => c.OnReset());
+            BallDestroyBehaviour.OnDestroyByUser -= AddScore;
+        }
+
+        public void DestroyBallByZone() => 
+            OnBallDestroy();
         
+        public abstract void DestroyBallByUser();
         protected abstract void OnBallDestroy();
 
         private void InvokeComponent<T>(Action<T> action) where T : IBallComponent
@@ -70,5 +63,8 @@ namespace View.Balls.Abstract
                 action(component);
             }
         }
+
+        private void AddScore() =>
+            _scoreService.AddScore(1);
     }
 }

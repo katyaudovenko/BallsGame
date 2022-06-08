@@ -4,11 +4,12 @@ namespace View.Balls.Behaviour
 {
     public class SimpleBall : Ball
     {
-        private void OnMouseDown() => DestroyBallByUser();
+        private void OnMouseDown() =>DestroyBallByUser();
 
-        protected override void OnBallDestroy()
-        {
+        public override void DestroyBallByUser() => 
+            BallDestroyBehaviour.OnDestroyBallByUser(this);
+
+        protected override void OnBallDestroy() => 
             BallDestroyBehaviour.OnDestroyBall(this);
-        }
     }
 }
