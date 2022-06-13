@@ -6,6 +6,7 @@ using Services.ServiceLocator;
 using UnityEngine;
 using View.Balls.Abstract;
 using View.Balls.Components;
+using View.Balls.Effects;
 
 namespace Services
 {

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeSpawnDelay: 0.7
   spawnObjects:
-  - chance: 70
+  - chance: 80
     ballType: 0
-  - chance: 20
+  - chance: 50
     ballType: 1
   - chance: 10
     ballType: 2
-  - chance: 39.3
-    ballType: 3
   - chance: 4
+    ballType: 3
+  - chance: 41.9
     ballType: 4

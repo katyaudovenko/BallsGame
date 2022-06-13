@@ -63,7 +63,8 @@ namespace Controller.States
         private void RegisterDetonateService()
         {
             var ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
-            ServiceLocator.Instance.Register(new DetonateService(ballsManager));
+            var info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<DetonateInfo>();
+            ServiceLocator.Instance.Register(new DetonateService(ballsManager, info));
         }
 
         private void RegisterHealthService(ConfigService config)

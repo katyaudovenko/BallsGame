@@ -15,10 +15,10 @@ namespace Services
         private readonly Queue<Action> _detonateQueue = new Queue<Action>();
         private bool _isEffectActive;
 
-        public DetonateService(BallsManager ballsManager)
+        public DetonateService(BallsManager ballsManager, DetonateInfo info)
         {
             _ballsManager = ballsManager;
-            _info = _info = ServiceLocator.ServiceLocator.Instance.GetService<ConfigService>().GetConfig<DetonateInfo>();
+            _info = info;
         }
 
         public void PlanDetonate(Vector3 position)
@@ -26,7 +26,10 @@ namespace Services
             if (!_isEffectActive)
                 Detonate(position);
             else
-                _detonateQueue.Enqueue(() => Detonate(position));
+            {
+                _detonateQueue.Enqueue(() => 
+                    Detonate(position));
+            }
         }
 
         private void Detonate(Vector3 position)
@@ -65,7 +68,7 @@ namespace Services
         {
             while (_detonateQueue.Count > 0)
             {
-                Action detonateAction = _detonateQueue.Dequeue();
+                var detonateAction = _detonateQueue.Dequeue();
                 detonateAction.Invoke();
             }
         }

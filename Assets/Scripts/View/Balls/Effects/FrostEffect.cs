@@ -1,7 +1,7 @@
 ﻿using Controller.Pool;
 using UnityEngine;
 
-namespace View.Balls.Components
+namespace View.Balls.Effects
 {
     public class FrostEffect : PoolObject, IPoolBehaviour
     {
@@ -13,19 +13,12 @@ namespace View.Balls.Components
         public void OnInitialize() => 
             _coldEffect = GetComponent<ParticleSystem>();
 
-        public void OnSetup()
-        {
+        public void OnSetup() => 
             _coldEffect.Play();
-        }
 
-        public void OnReset()
-        {
+        public void OnReset() => 
             _coldEffect.Stop();
-        }
 
-        public void DestroyEffect()
-        {
-            _pool.ReturnElement(this);
-        }
+        public void DestroyEffect() => _pool.ReturnElement(this);
     }
 }

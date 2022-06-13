@@ -14,12 +14,11 @@ namespace View.Balls.Destroy
         private PoolContainer _pool;
         private BallsManager _ballsManager;
 
+
         public void SetupPool(PoolContainer pool) => _pool = pool;
 
-        public void OnInitialize()
-        {
+        public void OnInitialize() => 
             _ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
-        }
 
         public void OnDestroyBallByUser<T>(T ball) where T : Ball
         {

@@ -3,7 +3,7 @@ using Services.ServiceLocator;
 using UnityEngine;
 using View.Balls.Abstract;
 using View.Balls.Behaviour;
-using View.Balls.Components;
+using View.Balls.Effects;
 
 namespace Controller.SpawnLogic
 {
@@ -44,12 +44,20 @@ namespace Controller.SpawnLogic
             effect.SetupPool(_poolContainer);
             return effect;
         }
-        
+
+        public ExplosionEffect CreateExplosionEffect(Vector3 position)
+        {
+            var effect = _poolContainer.GetFreeElement<ExplosionEffect>();
+            effect.transform.position = position;
+            effect.SetupPool(_poolContainer);
+            return effect;
+        }
         private T CreateBall<T>(Vector2 position, Transform parent, Vector3 scale, Color color) where T : Ball
         {
             var ball = _poolContainer.GetFreeElement<T>();
-            ball.transform.position = position;
-            ball.transform.localScale = scale;
+            var transform = ball.transform;
+            transform.position = position;
+            transform.localScale = scale;
             SetColor(ball, color);
             ball.transform.SetParent(parent);
             ball.SetupPool(_poolContainer);
