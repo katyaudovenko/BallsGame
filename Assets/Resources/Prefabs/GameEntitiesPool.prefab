@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7227877777858633057}
   - component: {fileID: 7227877777858633058}
   m_Layer: 0
-  m_Name: PoolContainer
+  m_Name: GameEntitiesPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +55,6 @@ MonoBehaviour:
   - count: 5
     prefab: {fileID: 3396875629427855942, guid: a3003b0ed2aa57f428cc0e2b64193ff2, type: 3}
   - count: 3
-    prefab: {fileID: 2868146273849284960, guid: 92ff402e4b8bfcc40907fa0c24773879, type: 3}
+    prefab: {fileID: 4922002787102599418, guid: f53a3cf8f582ba549845afffadbf6a9e, type: 3}
   - count: 3
-    prefab: {fileID: -5130877278220459007, guid: f53a3cf8f582ba549845afffadbf6a9e, type: 3}
+    prefab: {fileID: 5919033980488160921, guid: 92ff402e4b8bfcc40907fa0c24773879, type: 3}

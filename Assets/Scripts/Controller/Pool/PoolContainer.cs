@@ -32,5 +32,8 @@ namespace Controller.Pool
 
         public void ReturnElement<T>(T element) where T : MonoBehaviour, IPoolBehaviour => 
             _poolsMap[typeof(T)].ReturnElement(element);
+
+        public void ReturnElement<T>(Type type, T element) where T : MonoBehaviour, IPoolBehaviour => 
+            _poolsMap[type].ReturnElement(element);
     }
 }
