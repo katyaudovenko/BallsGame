@@ -4,16 +4,16 @@ namespace View.Balls.Behaviour
 {
     public class ColdBall : Ball
     {
-        private void OnMouseDown()
-        {
-            FreezeService.StartFreeze();
+        private void OnMouseDown() => 
             OnBallDestroy();
-        }
-        
+
         protected override void OnBallDestroy() => 
             BallDestroyBehaviour.OnDestroyBall(this);
 
-        public override void DestroyBallByUser() => 
+        public override void DestroyBallByUser()
+        {
+            FreezeService.StartFreeze();
             BallDestroyBehaviour.OnDestroyBallByUser(this);
+        }
     }
 }
