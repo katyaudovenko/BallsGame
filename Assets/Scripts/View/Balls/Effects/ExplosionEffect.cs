@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace View.Balls.Effects
 {
-    public class ExplosionEffect : PoolObject, IPoolBehaviour
+    public class ExplosionEffect : MonoBehaviour, IPoolBehaviour
     {
         private ParticleSystem _explosion;
         private PoolContainer _pool;

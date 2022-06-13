@@ -10,6 +10,7 @@ namespace View.DestroyZone
     {
         private HealthService _healthService;
         private HealthInfo _healthInfo;
+        
 
         private void Start()
         {

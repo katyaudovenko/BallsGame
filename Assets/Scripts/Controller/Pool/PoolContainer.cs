@@ -27,10 +27,10 @@ namespace Controller.Pool
             return container.transform;
         }
 
-        public T GetFreeElement<T>() where T : PoolObject, IPoolBehaviour => 
+        public T GetFreeElement<T>() where T : MonoBehaviour, IPoolBehaviour => 
             _poolsMap[typeof(T)].GetFreeElement<T>();
 
-        public void ReturnElement<T>(T element) where T : PoolObject, IPoolBehaviour => 
+        public void ReturnElement<T>(T element) where T : MonoBehaviour, IPoolBehaviour => 
             _poolsMap[typeof(T)].ReturnElement(element);
     }
 }

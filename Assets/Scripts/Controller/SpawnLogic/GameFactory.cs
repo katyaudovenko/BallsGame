@@ -52,6 +52,7 @@ namespace Controller.SpawnLogic
             effect.SetupPool(_poolContainer);
             return effect;
         }
+        
         private T CreateBall<T>(Vector2 position, Transform parent, Vector3 scale, Color color) where T : Ball
         {
             var ball = _poolContainer.GetFreeElement<T>();
@@ -69,6 +70,5 @@ namespace Controller.SpawnLogic
             var renderer = ball.GetComponentInChildren<SpriteRenderer>();
             renderer.color = color;
         }
-        
     }
 }

@@ -34,7 +34,7 @@ namespace Controller.Pool
             return createdElement;
         }
 
-        public void ReturnElement<T>(T element) where T : PoolObject, IPoolBehaviour
+        public void ReturnElement<T>(T element) where T : MonoBehaviour, IPoolBehaviour
         {
             if (_pool.Contains(element))
                 return;
@@ -42,16 +42,16 @@ namespace Controller.Pool
             _pool.Push(element);
             element.transform.SetParent(_container);
             element.gameObject.SetActive(false);
-            element.Behaviour.OnReset();
+            element.OnReset();
         }
 
-        public T GetFreeElement<T>() where T : PoolObject, IPoolBehaviour
+        public T GetFreeElement<T>() where T : MonoBehaviour, IPoolBehaviour
         {
             var element = (_pool.Count == 0 ? 
                 CreatePoolElement().Behaviour : 
                 _pool.Pop()) as T;
             element.gameObject.SetActive(true);
-            element.Behaviour.OnSetup();
+            element.OnSetup();
             return element;
         }
     }

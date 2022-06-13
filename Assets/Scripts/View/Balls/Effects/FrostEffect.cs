@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace View.Balls.Effects
 {
-    public class FrostEffect : PoolObject, IPoolBehaviour
+    public class FrostEffect : MonoBehaviour, IPoolBehaviour
     {
         private ParticleSystem _coldEffect;
         private PoolContainer _pool;

@@ -2,12 +2,13 @@
 using Controller.Pool;
 using Services;
 using Services.ServiceLocator;
+using UnityEngine;
 using View.Balls.Components;
 using View.Balls.Destroy;
 
 namespace View.Balls.Abstract
 {
-    public abstract class Ball : PoolObject, IPoolBehaviour
+    public abstract class Ball : MonoBehaviour, IPoolBehaviour
     {
         private IBallComponent[] _ballComponents;
         private PoolContainer _pool;
