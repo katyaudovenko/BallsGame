@@ -5,7 +5,7 @@ namespace View.Balls.Behaviour
     public class ColdBall : Ball
     {
         private void OnMouseDown() => 
-            OnBallDestroy();
+            DestroyBallByUser();
 
         protected override void OnBallDestroy() => 
             BallDestroyBehaviour.OnDestroyBall(this);
