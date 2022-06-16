@@ -10,6 +10,7 @@ namespace Controller.States
     public class RegisterState : State
     {
         private const string FreezeContainerPath = "Prefabs/FreezeService";
+        private const string WindowsCanvasPath = "Prefabs/WindowCanvas";
 
         public RegisterState(StateMachine stateMachine) : base(stateMachine)
         {
@@ -26,6 +27,7 @@ namespace Controller.States
         private void InitializeServices()
         {
             ServiceLocator.Instance.GetService<GameFactory>().Initialize();
+            ServiceLocator.Instance.GetService<WindowsManager>().Initialize();
         }
 
         private void RegisterServices()
@@ -33,16 +35,37 @@ namespace Controller.States
             var config = ServiceLocator.Instance.Register(new ConfigService());
 
             ServiceLocator.Instance.Register(new ProgressService());
-            ServiceLocator.Instance.Register(new ScoreService());
             ServiceLocator.Instance.Register(new BallsManager());
             ServiceLocator.Instance.Register(new GameFactory());
-
+            
+            RegisterScoreService();
+            RegisterWindowsManager();
             RegisterCoinsService();
             RegisterDetonateService();
             RegisterHealthService(config);
             RegisterFreezeService();
+            RegisterEndGameService();
         }
 
+        private void RegisterScoreService()
+        {
+            var progress = ServiceLocator.Instance.GetService<ProgressService>();
+            ServiceLocator.Instance.Register(new ScoreService(progress));
+        }
+
+        private void RegisterWindowsManager()
+        {
+            var windowsCanvasPrefab = Resources.Load<GameObject>(WindowsCanvasPath);
+            var windowsCanvas = Object.Instantiate(windowsCanvasPrefab);
+            var windowsManager = windowsCanvas.GetComponentInChildren<WindowsManager>();
+            ServiceLocator.Instance.Register(windowsManager);
+        }
+
+        private void RegisterEndGameService()
+        {
+            var windowsManager = ServiceLocator.Instance.GetService<WindowsManager>();
+            ServiceLocator.Instance.Register(new EndGameService(windowsManager));
+        }
         private void RegisterCoinsService()
         {
             var progressService = ServiceLocator.Instance.GetService<ProgressService>();

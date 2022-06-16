@@ -17,13 +17,13 @@ namespace Services
 
         private void UpdateCoins()
         {
-            Coins = _progress.Progress.Coins;
+            Coins = _progress.Progress.coins;
         }
 
         public void AddCoin(int value)
         {
             Coins += value;
-            _progress.Progress.Coins = Coins;
+            _progress.Progress.coins = Coins;
             OnChanged?.Invoke();
         }
     }

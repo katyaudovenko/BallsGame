@@ -5,15 +5,15 @@ namespace Model.Progress
     [Serializable]
     public class ProgressData
     {
-        public int BestScore;
-        public int Score;
-        public int Coins;
+        public int bestScore;
+        public int score;
+        public int coins;
 
         public ProgressData()
         {
-            BestScore = 0;
-            Score = 0;
-            Coins = 0;
+            bestScore = 0;
+            score = 0;
+            coins = 0;
         }
     }
 }
