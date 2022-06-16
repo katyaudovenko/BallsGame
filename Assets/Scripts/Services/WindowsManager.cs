@@ -3,34 +3,35 @@ using Controller.Pool;
 using Controller.Windows;
 using Services.ServiceLocator;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Services
 {
-    public class WindowsManager : IService
+    public class WindowsManager : MonoBehaviour, IService
     {
-        private const string PoolContainerPath = "Prefabs/WindowsPool";
-        
-        private PoolContainer _pool;
+        [SerializeField] private PoolContainer pool;
         
         public void Initialize()
         {
-            var prefab = Resources.Load<PoolContainer>(PoolContainerPath);
-            _pool = Object.Instantiate(prefab);
-            _pool.CreatePools();
+            pool.CreatePools();
         }
 
-        public void OpenWindow<T>() where T : BaseWindow
+        public T OpenWindow<T>() where T : BaseWindow
         {
-            var window = _pool.GetFreeElement<T>();
+            var window = pool.GetFreeElement<T>();
+            SetWindowPosition(window);
+            window.transform.SetParent(transform, false);
             window.OpenWindow();
             window.OnClose += CloseWindow;
+            return window;
         }
 
         public void CloseWindow<T>(T window) where T : BaseWindow => 
-            window.CloseWindow(() => _pool.ReturnElement(window));
+            window.CloseWindow(() => pool.ReturnElement(window));
 
         private void CloseWindow(Type type, BaseWindow window) => 
-            window.CloseWindow(() => _pool.ReturnElement(type, window));
+            window.CloseWindow(() => pool.ReturnElement(type, window));
+
+        private void SetWindowPosition<T>(T window) where T : BaseWindow => 
+            window.transform.position = Vector3.zero;
     }
 }
