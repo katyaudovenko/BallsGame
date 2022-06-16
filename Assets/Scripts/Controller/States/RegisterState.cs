@@ -44,7 +44,6 @@ namespace Controller.States
             RegisterDetonateService();
             RegisterHealthService(config);
             RegisterFreezeService();
-            RegisterEndGameService();
         }
 
         private void RegisterScoreService()
@@ -60,12 +59,7 @@ namespace Controller.States
             var windowsManager = windowsCanvas.GetComponentInChildren<WindowsManager>();
             ServiceLocator.Instance.Register(windowsManager);
         }
-
-        private void RegisterEndGameService()
-        {
-            var windowsManager = ServiceLocator.Instance.GetService<WindowsManager>();
-            ServiceLocator.Instance.Register(new EndGameService(windowsManager));
-        }
+        
         private void RegisterCoinsService()
         {
             var progressService = ServiceLocator.Instance.GetService<ProgressService>();

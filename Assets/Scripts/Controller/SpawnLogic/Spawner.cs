@@ -19,9 +19,12 @@ namespace Controller.SpawnLogic
         private FreezeService _freezeService;
         private BallsManager _ballsManager;
         private SpawnZoneSize _spawnZoneSize;
+        private bool _canSpawn;
         
         private void Start()
         {
+            _canSpawn = true;
+            
             _spawnInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<SpawnInfo>();
             _ballInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
@@ -31,6 +34,7 @@ namespace Controller.SpawnLogic
             _spawnZoneSize = GetComponent<SpawnZoneSize>();
             
             StartCoroutine(SpawnBallsWithDelay());
+            GlobalEventManager.EndGame += StopSpawn;
         }
         
         private IEnumerator SpawnBallsWithDelay()
@@ -38,6 +42,9 @@ namespace Controller.SpawnLogic
             while (true)
             {
                 yield return new WaitForSeconds(_spawnInfo.TimeSpawnDelay);
+                
+                if(!_canSpawn) 
+                    yield break;
                 
                 yield return new WaitUntil(() => !_freezeService.IsEffectActive);
 
@@ -54,6 +61,12 @@ namespace Controller.SpawnLogic
             var x = Random.Range(minInclusive,maxInclusive);
             var ballPosition = new Vector2(x, transform.position.y);
             return ballPosition;
+        }
+
+        private void StopSpawn()
+        {
+            StopCoroutine(SpawnBallsWithDelay());
+            _canSpawn = false;
         }
     }
     

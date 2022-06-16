@@ -10,7 +10,6 @@ namespace View.DestroyZone
     {
         private HealthService _healthService;
         private HealthInfo _healthInfo;
-        
 
         private void Start()
         {
@@ -26,11 +25,7 @@ namespace View.DestroyZone
 
         private static void DestroyBall(Collider2D ballCollider) => ballCollider.GetComponent<Ball>().DestroyBallByZone();
 
-        private void DecreaseHealth()
-        {
+        private void DecreaseHealth() => 
             _healthService.Receive(_healthInfo.Damage);
-            Debug.Log(_healthService.Health);
-        }
-        
     }
 }

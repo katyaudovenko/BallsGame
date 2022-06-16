@@ -50,7 +50,7 @@ namespace Services
                 _frostEffect = _gameFactory.CreateFrostEffect();
 
             OnFreeze?.Invoke();
-            _ballsManager.InvokeActionOnBall<Ball>(ball => ball.BallMove.StopMove());
+            _ballsManager.InvokeActionOnBall<Ball>(ball => ball.BallMove.FreezeMove());
         }
 
         private void EndFreeze()

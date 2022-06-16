@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Services.ServiceLocator;
 
 namespace Controller.States
 {
-    public class StateMachine
+    public class StateMachine : IService
     {
         private State _currentState;
         private readonly Dictionary<Type, State> _statesMap = new Dictionary<Type, State>();

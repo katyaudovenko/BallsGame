@@ -4,11 +4,25 @@ using UnityEngine;
 
 namespace Controller.Windows
 {
+    [RequireComponent(typeof(WindowAnimator))]
     public abstract class BaseWindow : MonoBehaviour, IPoolBehaviour
     {
-        public event Action<Type, BaseWindow> OnClose;
+        public Action<Type, BaseWindow> OnClose;
         
         private WindowAnimator _windowAnimator;
+        private RectTransform _rectTransform;
+
+        public RectTransform RectTransform
+        {
+            get
+            {
+                if (_rectTransform == null && !TryGetComponent(out _rectTransform))
+                {
+                    Debug.LogError("Object has not got link");
+                }
+                return _rectTransform;
+            }
+        }
 
         public virtual void OnInitialize() => 
             _windowAnimator = GetComponent<WindowAnimator>();

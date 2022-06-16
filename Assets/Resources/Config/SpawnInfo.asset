@@ -18,9 +18,9 @@ MonoBehaviour:
     ballType: 0
   - chance: 50
     ballType: 1
-  - chance: 10
+  - chance: 15
     ballType: 2
-  - chance: 62.9
+  - chance: 5
     ballType: 3
   - chance: 5
     ballType: 4

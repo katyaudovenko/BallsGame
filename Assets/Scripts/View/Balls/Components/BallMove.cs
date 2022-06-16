@@ -22,17 +22,18 @@ namespace View.Balls.Components
         public void OnSetup() => 
             StartMove();
 
-        public void OnReset() { }
-
+        public void OnReset() {}
+        
         public void StartMove()
         {
             if(!_freezeService.IsEffectActive)
                 _rigidbody2D.velocity = Vector2.down * _info.Speed;
         }
 
-        public void StopMove()
-        {
+        public void FreezeMove() => 
+            _rigidbody2D.velocity = Vector2.down * 0.4f;
+
+        public void StopMove() =>
             _rigidbody2D.velocity = Vector2.zero;
-        }
     }
 }

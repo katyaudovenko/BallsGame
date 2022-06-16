@@ -1,4 +1,5 @@
 ﻿using System;
+using Controller;
 using Controller.Pool;
 using Services;
 using Services.ServiceLocator;
@@ -40,12 +41,14 @@ namespace View.Balls.Abstract
         {
             InvokeComponent<IBallComponent>(c => c.OnSetup());
             BallDestroyBehaviour.OnDestroyByUser += AddScore;
+            GlobalEventManager.EndGame += OnBallDestroy;
         }
 
         public virtual void OnReset()
         {
             InvokeComponent<IBallComponent>(c => c.OnReset());
-            BallDestroyBehaviour.OnDestroyByUser -= AddScore;
+            BallDestroyBehaviour.OnDestroyByUser -= AddScore;           
+            GlobalEventManager.EndGame -= OnBallDestroy;
         }
 
         public void DestroyBallByZone() => 

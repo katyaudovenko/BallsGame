@@ -40,7 +40,7 @@ namespace Controller.Pool
                 return;
             
             _pool.Push(element);
-            element.transform.SetParent(_container);
+            element.transform.SetParent(_container, false);
             element.gameObject.SetActive(false);
             element.OnReset();
         }

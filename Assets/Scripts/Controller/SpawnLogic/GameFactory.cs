@@ -9,7 +9,7 @@ namespace Controller.SpawnLogic
 {
     public class GameFactory : IService
     {
-        private const string PoolContainerPath = "Prefabs/PoolContainer";
+        private const string PoolContainerPath = "Prefabs/GameEntitiesPool";
 
         private PoolContainer _poolContainer;
         
