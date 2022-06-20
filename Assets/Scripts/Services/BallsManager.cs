@@ -4,7 +4,7 @@ using System.Linq;
 using Services.ServiceLocator;
 using View.Balls.Abstract;
 
-namespace Controller
+namespace Services
 {
     public class BallsManager : IService
     {

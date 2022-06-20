@@ -15,6 +15,7 @@ namespace Controller.Windows
         [SerializeField] private TextMeshProUGUI scoreText;
 
         private ScoreService _scoreService;
+        private ProgressService _progressService;
         private Action _onRestart;
         private Action _onExit;
 
@@ -24,6 +25,7 @@ namespace Controller.Windows
             restartButton.onClick.AddListener(OnClickRestartButton);
             goToMenuButton.onClick.AddListener(OnClickGoToMenuButton);
 
+            _progressService = ServiceLocator.Instance.GetService<ProgressService>();
             _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
         }
 
@@ -31,7 +33,7 @@ namespace Controller.Windows
         {
             base.OnSetup();
             scoreText.text = _scoreService.Score.ToString();
-            recordText.text = _scoreService.BestScore.ToString();
+            recordText.text = _progressService.Progress.bestScore.ToString();
         }
 
         public void Setup(Action onRestart, Action onExit)
