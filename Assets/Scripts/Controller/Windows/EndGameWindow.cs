@@ -16,6 +16,7 @@ namespace Controller.Windows
 
         private ScoreService _scoreService;
         private Action _onRestart;
+        private Action _onExit;
 
         public override void OnInitialize()
         {
@@ -33,8 +34,11 @@ namespace Controller.Windows
             recordText.text = _scoreService.BestScore.ToString();
         }
 
-        public void Setup(Action onRestart) => 
+        public void Setup(Action onRestart, Action onExit)
+        {
+            _onExit = onExit;
             _onRestart = onRestart;
+        }
 
         private void OnClickRestartButton()
         {
@@ -44,6 +48,7 @@ namespace Controller.Windows
 
         private void OnClickGoToMenuButton()
         {
+            _onExit?.Invoke();
             OnClose.Invoke(typeof(EndGameWindow), this);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Controller.States;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Controller
 {
@@ -23,10 +24,27 @@ namespace Controller
             DontDestroyOnLoad(this);
         }
 
+        private void Start() => 
+            StartGame();
+
         private void StartStateMachine()
         {
             _stateMachine = new StateMachine();
             _stateMachine.ChangeState<RegisterState>();
+        }
+
+        private void StartGame()
+        {
+            var sceneIndex = SceneManager.GetActiveScene().buildIndex;
+            switch (sceneIndex)
+            {
+                case 0:
+                    _stateMachine.ChangeState<MainMenuState>();
+                    break;
+                case 1:
+                    _stateMachine.ChangeState<GameLoopState>();
+                    break;
+            }
         }
     }
 }

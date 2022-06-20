@@ -21,10 +21,8 @@ namespace Controller.SpawnLogic
         private SpawnZoneSize _spawnZoneSize;
         private bool _canSpawn;
         
-        private void Start()
+        private void Awake()
         {
-            _canSpawn = true;
-            
             _spawnInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<SpawnInfo>();
             _ballInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<BallInfo>();
             _gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
@@ -33,10 +31,22 @@ namespace Controller.SpawnLogic
             
             _spawnZoneSize = GetComponent<SpawnZoneSize>();
             
-            StartCoroutine(SpawnBallsWithDelay());
+            GlobalEventManager.StartGame += StartGame;
             GlobalEventManager.EndGame += StopSpawn;
         }
-        
+
+        private void OnDestroy()
+        {
+            GlobalEventManager.StartGame -= StartGame;
+            GlobalEventManager.EndGame -= StopSpawn;
+        }
+
+        private void StartGame()
+        {
+            _canSpawn = true;
+            StartCoroutine(SpawnBallsWithDelay());
+        }
+
         private IEnumerator SpawnBallsWithDelay()
         {
             while (true)
@@ -65,8 +75,8 @@ namespace Controller.SpawnLogic
 
         private void StopSpawn()
         {
-            StopCoroutine(SpawnBallsWithDelay());
             _canSpawn = false;
+            StopCoroutine(SpawnBallsWithDelay());
         }
     }
     

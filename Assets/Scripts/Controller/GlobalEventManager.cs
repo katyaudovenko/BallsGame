@@ -9,5 +9,8 @@ namespace Controller
 
         public static event Action EndGame;
         public static void OnEndGame() => EndGame?.Invoke();
+
+        public static event Action MainMenuPlayClick;
+        public static void OnMainMenuPlayClick() => MainMenuPlayClick?.Invoke();
     }
 }

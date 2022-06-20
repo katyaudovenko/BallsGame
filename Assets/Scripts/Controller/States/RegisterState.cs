@@ -1,4 +1,5 @@
 ﻿using Controller.SpawnLogic;
+using Controller.States.Base;
 using Model.Infos;
 using Services;
 using Services.ServiceLocator;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace Controller.States
 {
-    public class RegisterState : State
+    public class RegisterState : State, IState
     {
         private const string FreezeContainerPath = "Prefabs/FreezeService";
         private const string WindowsCanvasPath = "Prefabs/WindowCanvas";
@@ -17,11 +18,10 @@ namespace Controller.States
             RegisterServices();
         }
 
-        public override void Enter()
+        public void Enter()
         {
-            base.Enter();
             InitializeServices();
-            _stateMachine.ChangeState<LoadDataState>();
+            StateMachine.ChangeState<LoadDataState>();
         }
 
         private void InitializeServices()
@@ -89,5 +89,7 @@ namespace Controller.States
             var healthInfo = config.GetConfig<HealthInfo>();
             ServiceLocator.Instance.Register(new HealthService(healthInfo));
         }
+
+        public void Exit() { }
     }
 }

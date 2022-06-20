@@ -1,5 +1,5 @@
+using Controller;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace View.UIViews
@@ -8,15 +8,10 @@ namespace View.UIViews
     {
         [SerializeField] private Button play;
 
-        private void Awake()
-        {
+        private void Awake() => 
             play.onClick.AddListener(PlayGame);
-        }
 
-        private void PlayGame()
-        {
-            SceneManager.LoadScene(1);
-        }
-   
+        private void PlayGame() => 
+            GlobalEventManager.OnMainMenuPlayClick();
     }
 }
