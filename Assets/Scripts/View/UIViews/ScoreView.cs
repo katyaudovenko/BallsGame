@@ -1,4 +1,6 @@
-﻿using Services;
+﻿using System;
+using Controller;
+using Services;
 using Services.ServiceLocator;
 using TMPro;
 using UnityEngine;
@@ -10,12 +12,15 @@ namespace View.UIViews
     {
         private TextMeshProUGUI _scoreText;
         private ScoreService _scoreService;
-        private void Start()
+        private void Awake()
         {
             _scoreService = ServiceLocator.Instance.GetService<ScoreService>();
             _scoreText = GetComponent<TextMeshProUGUI>();
             _scoreService.OnChanged += UpdateScoreText;
         }
+
+        private void OnDestroy() => 
+            _scoreService.OnChanged -= UpdateScoreText;
 
         private void UpdateScoreText()
         {

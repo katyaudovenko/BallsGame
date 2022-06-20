@@ -11,13 +11,16 @@ namespace View.UIViews
         private TextMeshProUGUI _coinsText;
         private CoinsService _coins;
 
-        private void Start()
+        private void Awake()
         {
             _coins = ServiceLocator.Instance.GetService<CoinsService>();
             _coinsText = GetComponent<TextMeshProUGUI>();
             _coins.OnChanged += UpdateCoinsCount;
-            UpdateCoinsCount();
+            //UpdateCoinsCount();
         }
+
+        private void OnDestroy() => 
+            _coins.OnChanged -= UpdateCoinsCount;
 
         private void UpdateCoinsCount()
         {

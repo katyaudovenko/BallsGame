@@ -21,14 +21,14 @@ namespace Services
         private float _currentTime;
 
         public bool IsEffectActive { get; private set; }
-
+        
         public void Construct(BallsManager ballsManager, FreezeInfo freezeInfo, GameFactory gameFactory)
         {
             _ballsManager = ballsManager;
             _freezeInfo = freezeInfo;
             _gameFactory = gameFactory;
         }
-
+        
         private void Update()
         {
             if (!IsEffectActive) 

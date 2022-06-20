@@ -10,11 +10,15 @@ namespace View.UIViews
     {
         [SerializeField] private List<Image> lives;
         private HealthService _healthService;
-        private void Start()
+        
+        private void Awake()
         {
             _healthService = ServiceLocator.Instance.GetService<HealthService>();
             _healthService.OnChanged += UpdateLivesCount;
         }
+
+        private void OnDestroy() => 
+            _healthService.OnChanged -= UpdateLivesCount;
 
         private void UpdateLivesCount()
         {

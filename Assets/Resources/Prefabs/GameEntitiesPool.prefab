@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7227877777858633057}
   - component: {fileID: 7227877777858633058}
+  - component: {fileID: 7595671285559270922}
   m_Layer: 0
   m_Name: GameEntitiesPool
   m_TagString: Untagged
@@ -58,3 +59,15 @@ MonoBehaviour:
     prefab: {fileID: 4922002787102599418, guid: f53a3cf8f582ba549845afffadbf6a9e, type: 3}
   - count: 3
     prefab: {fileID: 5919033980488160921, guid: 92ff402e4b8bfcc40907fa0c24773879, type: 3}
+--- !u!114 &7595671285559270922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227877777858633087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1054e297bb4588913fb9dfb9b63ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

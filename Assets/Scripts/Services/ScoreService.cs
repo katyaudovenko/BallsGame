@@ -1,4 +1,5 @@
 ﻿using System;
+using Controller;
 using Services.ServiceLocator;
 
 namespace Services
@@ -15,6 +16,7 @@ namespace Services
         {
             _progressService = progressService;
             _progressService.OnDataLoad += UpdateScore;
+            GlobalEventManager.StartGame += ResetScore;
         }
 
         private void UpdateScore() => 
@@ -25,6 +27,12 @@ namespace Services
             Score += score;
             if (Score > _progressService.Progress.bestScore) 
                 _progressService.Progress.bestScore = Score;
+            OnChanged?.Invoke();
+        }
+
+        private void ResetScore()
+        {
+            Score = 0;
             OnChanged?.Invoke();
         }
     }

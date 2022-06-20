@@ -9,7 +9,7 @@ namespace Controller.Pool
         [SerializeField] private List<PoolInfo> poolsInfo;
 
         private readonly Dictionary<Type, ObjectsPool> _poolsMap = new Dictionary<Type, ObjectsPool>();
-
+    
         public void CreatePools()
         {
             foreach (var poolInfo in poolsInfo)

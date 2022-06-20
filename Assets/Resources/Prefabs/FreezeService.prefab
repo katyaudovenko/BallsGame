@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4267478139886834994}
   - component: {fileID: 8199857921320247978}
+  - component: {fileID: 9080413577338274091}
   m_Layer: 0
   m_Name: FreezeService
   m_TagString: Untagged
@@ -43,4 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142dbf6f07984e3cbdeb4adc6e38cadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeInfo: {fileID: 11400000, guid: 555adc61f869be64898d345f8fc6a19f, type: 2}
+--- !u!114 &9080413577338274091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568367043841257192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1054e297bb4588913fb9dfb9b63ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
