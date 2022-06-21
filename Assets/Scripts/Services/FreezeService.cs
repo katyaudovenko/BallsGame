@@ -1,5 +1,4 @@
 ﻿using System;
-using Controller;
 using Controller.SpawnLogic;
 using Model.Infos;
 using Services.ServiceLocator;
@@ -17,13 +16,16 @@ namespace Services
         private BallsManager _ballsManager;
         private GameFactory _gameFactory;
         private FrostEffect _frostEffect;
+        private ProgressService _progressService;
 
         private float _currentTime;
 
         public bool IsEffectActive { get; private set; }
         
-        public void Construct(BallsManager ballsManager, FreezeInfo freezeInfo, GameFactory gameFactory)
+        public void Construct(BallsManager ballsManager, FreezeInfo freezeInfo, 
+            GameFactory gameFactory, ProgressService progressService)
         {
+            _progressService = progressService;
             _ballsManager = ballsManager;
             _freezeInfo = freezeInfo;
             _gameFactory = gameFactory;
@@ -43,7 +45,7 @@ namespace Services
 
         public void StartFreeze()
         {
-            _currentTime = _freezeInfo.freezeTime;
+            _currentTime = _freezeInfo.freezeTime + _progressService.Progress.playerStats.freezeTimeModificator;
             IsEffectActive = true;
             
             if(_frostEffect == null)

@@ -8,9 +8,12 @@ namespace Model.Progress
         public int bestScore;
         public int score;
         public int coins;
+        public PlayerStats playerStats;
 
         public ProgressData()
         {
+            playerStats = new PlayerStats();
+            
             bestScore = 0;
             score = 0;
             coins = 0;

@@ -1,4 +1,5 @@
 using Controller;
+using Controller.Windows.Shop;
 using Services;
 using Services.ServiceLocator;
 using TMPro;
@@ -11,11 +12,17 @@ namespace View.UIViews
     {
         [SerializeField] private Button play;
         [SerializeField] private TextMeshProUGUI bestScore;
+        [SerializeField] private Button shopButton;
+
+        private WindowsManager _windowsManager;
         private ProgressService _progressService;
         private void Awake()
         {
-            play.onClick.AddListener(PlayGame);
             _progressService = ServiceLocator.Instance.GetService<ProgressService>();
+            _windowsManager = ServiceLocator.Instance.GetService<WindowsManager>();
+            
+            play.onClick.AddListener(PlayGame);
+            shopButton.onClick.AddListener(OpenShop);
             
             UpdateBestScore();
         }
@@ -25,5 +32,8 @@ namespace View.UIViews
 
         private void PlayGame() => 
             GlobalEventManager.OnMainMenuPlayClick();
+
+        private void OpenShop() =>
+            _windowsManager.OpenWindow<ShopWindow>();
     }
 }

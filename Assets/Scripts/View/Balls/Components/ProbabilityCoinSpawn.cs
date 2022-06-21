@@ -18,11 +18,13 @@ namespace View.Balls.Components
         private CoinSpawnConfig _coinSpawn;
         private CoinsService _coinsService;
         private CommonBallDestroy _commonBallDestroy;
+        private ProgressService _progressService;
 
         public void OnInitialize()
         {
             _coinSpawn = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<CoinSpawnContainer>().GetConfig(ballType);
             _coinsService = ServiceLocator.Instance.GetService<CoinsService>();
+            _progressService = ServiceLocator.Instance.GetService<ProgressService>();
             _commonBallDestroy = GetComponent<CommonBallDestroy>();
         }
 
@@ -38,8 +40,9 @@ namespace View.Balls.Components
 
         private void SpawnCoin()
         {
-            if(RandomExtension.CheckProbability(_coinSpawn.Chance,FullProgress))
-                _coinsService.AddCoin(_coinSpawn.costBall);
+            if (!RandomExtension.CheckProbability(_coinSpawn.Chance, FullProgress)) return;
+            var finalCoinsCount = _coinSpawn.costBall + _progressService.Progress.playerStats.coinsModificator;
+            _coinsService.AddCoin(finalCoinsCount);
         }
     }
 }

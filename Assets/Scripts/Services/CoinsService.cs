@@ -26,5 +26,17 @@ namespace Services
             _progress.Progress.coins = Coins;
             OnChanged?.Invoke();
         }
+
+        public bool SpendCoins(int value)
+        {
+            if (!IsEnough(value)) return false;
+            _progress.Progress.coins -= value;
+            Coins = _progress.Progress.coins;
+            OnChanged?.Invoke();
+            return true;
+        }
+
+        private bool IsEnough(int value) => 
+            _progress.Progress.coins >= value;
     }
 }

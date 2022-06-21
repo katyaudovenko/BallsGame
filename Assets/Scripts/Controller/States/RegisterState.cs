@@ -73,7 +73,8 @@ namespace Controller.States
             var freezeInfo = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<FreezeInfo>();
             var ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             var gameFactory = ServiceLocator.Instance.GetService<GameFactory>();
-            service.Construct(ballsManager, freezeInfo, gameFactory);
+            var progressService = ServiceLocator.Instance.GetService<ProgressService>();
+            service.Construct(ballsManager, freezeInfo, gameFactory, progressService);
             ServiceLocator.Instance.Register(service);
         }
 
@@ -81,7 +82,8 @@ namespace Controller.States
         {
             var ballsManager = ServiceLocator.Instance.GetService<BallsManager>();
             var info = ServiceLocator.Instance.GetService<ConfigService>().GetConfig<DetonateInfo>();
-            ServiceLocator.Instance.Register(new DetonateService(ballsManager, info));
+            var progressService = ServiceLocator.Instance.GetService<ProgressService>(); 
+            ServiceLocator.Instance.Register(new DetonateService(ballsManager, info, progressService));
         }
 
         private void RegisterHealthService(ConfigService config)

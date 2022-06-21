@@ -16,7 +16,6 @@ namespace View.UIViews
             _coins = ServiceLocator.Instance.GetService<CoinsService>();
             _coinsText = GetComponent<TextMeshProUGUI>();
             _coins.OnChanged += UpdateCoinsCount;
-            //UpdateCoinsCount();
         }
 
         private void OnDestroy() => 

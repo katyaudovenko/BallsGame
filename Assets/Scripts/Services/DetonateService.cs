@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Controller;
 using Model.Infos;
 using Services.ServiceLocator;
 using UnityEngine;
@@ -13,12 +12,14 @@ namespace Services
         private readonly DetonateInfo _info;
         private readonly BallsManager _ballsManager;
         private readonly Queue<Action> _detonateQueue = new Queue<Action>();
+        private readonly ProgressService _progressService;
         private bool _isEffectActive;
 
-        public DetonateService(BallsManager ballsManager, DetonateInfo info)
+        public DetonateService(BallsManager ballsManager, DetonateInfo info, ProgressService progressService)
         {
             _ballsManager = ballsManager;
             _info = info;
+            _progressService = progressService;
         }
 
         public void PlanDetonate(Vector3 position)
@@ -45,7 +46,8 @@ namespace Services
             _ballsManager.InvokeActionOnBall<Ball>(ball =>
             {
                 var distance = (ball.transform.position - position).magnitude;
-                if (distance < _info.radius)
+                var radius = _info.radius + _progressService.Progress.playerStats.bombRadiusModificator;
+                if (distance < radius)
                 {
                     destroyBalls.Add(ball);
                 }
