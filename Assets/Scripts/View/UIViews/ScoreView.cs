@@ -1,6 +1,4 @@
-﻿using System;
-using Controller;
-using Services;
+﻿using Services;
 using Services.ServiceLocator;
 using TMPro;
 using UnityEngine;

@@ -18,6 +18,7 @@ namespace Services
         private void UpdateCoins()
         {
             Coins = _progress.Progress.coins;
+            OnChanged?.Invoke();
         }
 
         public void AddCoin(int value)

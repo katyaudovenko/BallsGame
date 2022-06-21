@@ -9,21 +9,31 @@ namespace View.UIViews
     public class CoinsView : MonoBehaviour
     {
         private TextMeshProUGUI _coinsText;
-        private CoinsService _coins;
-
+        private CoinsService _coinsService;
+        private ProgressService _progressService;
         private void Awake()
         {
-            _coins = ServiceLocator.Instance.GetService<CoinsService>();
-            _coinsText = GetComponent<TextMeshProUGUI>();
-            _coins.OnChanged += UpdateCoinsCount;
+            Initialize();
+
+            _coinsService.OnChanged += UpdateCoinsCount;
+            UpdateCoinsCount();
+            UpdateCoinsOnStart();
         }
 
         private void OnDestroy() => 
-            _coins.OnChanged -= UpdateCoinsCount;
+            _coinsService.OnChanged -= UpdateCoinsCount;
 
-        private void UpdateCoinsCount()
+        private void Initialize()
         {
-            _coinsText.text = _coins.Coins.ToString();
+            _coinsService = ServiceLocator.Instance.GetService<CoinsService>();
+            _progressService = ServiceLocator.Instance.GetService<ProgressService>();
+            _coinsText = GetComponent<TextMeshProUGUI>();
         }
+
+        private void UpdateCoinsCount() => 
+            _coinsText.text = _coinsService.Coins.ToString();
+
+        private void UpdateCoinsOnStart() =>
+            _coinsText.text = _progressService.Progress.coins.ToString();
     }
 }
