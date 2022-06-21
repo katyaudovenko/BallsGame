@@ -43,7 +43,7 @@ namespace Services
 
         public void StartFreeze()
         {
-            _currentTime = _freezeInfo.FreezeTime;
+            _currentTime = _freezeInfo.freezeTime;
             IsEffectActive = true;
             
             if(_frostEffect == null)

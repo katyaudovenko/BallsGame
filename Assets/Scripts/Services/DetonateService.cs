@@ -45,7 +45,7 @@ namespace Services
             _ballsManager.InvokeActionOnBall<Ball>(ball =>
             {
                 var distance = (ball.transform.position - position).magnitude;
-                if (distance < _info.Radius)
+                if (distance < _info.radius)
                 {
                     destroyBalls.Add(ball);
                 }

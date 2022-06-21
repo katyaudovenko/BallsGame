@@ -39,7 +39,7 @@ namespace View.Balls.Components
         private void SpawnCoin()
         {
             if(RandomExtension.CheckProbability(_coinSpawn.Chance,FullProgress))
-                _coinsService.AddCoin(_coinSpawn.CostBall);
+                _coinsService.AddCoin(_coinSpawn.costBall);
         }
     }
 }
