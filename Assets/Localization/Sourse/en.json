@@ -1,0 +1,44 @@
+﻿{"data":
+  [
+    {
+      "key": "gameName",
+      "value": "Burst balls"
+    },
+    {
+      "key": "scoreText",
+      "value": "Score"
+    },
+    {
+      "key": "bestScoreText",
+      "value": "Record"
+    },
+    {
+      "key": "shopTitle",
+      "value": "Upgrade shop"
+    },
+    {
+      "key": "firstProduct",
+      "value": "Freeze time"
+    },
+    {
+      "key": "secondProduct",
+      "value": "Bomb radius"
+    },
+    {
+      "key": "thirdProduct",
+      "value": "Coins count"
+    },
+    {
+      "key": "loseTitleText",
+      "value": "Lose game"
+    },
+    {
+      "key": "settingsTitle",
+      "value": "Settings"
+    },
+    {
+      "key": "language",
+      "value": "Language"
+    }
+  ]
+}

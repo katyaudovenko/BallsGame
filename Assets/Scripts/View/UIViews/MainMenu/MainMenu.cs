@@ -1,4 +1,5 @@
 using Controller;
+using Controller.Windows.Settings;
 using Controller.Windows.Shop;
 using Services;
 using Services.ServiceLocator;
@@ -11,6 +12,7 @@ namespace View.UIViews.MainMenu
     {
         [SerializeField] private Button play;
         [SerializeField] private Button shopButton;
+        [SerializeField] private Button settingsButton;
 
         private WindowsManager _windowsManager;
         private void Awake()
@@ -19,7 +21,7 @@ namespace View.UIViews.MainMenu
             
             play.onClick.AddListener(PlayGame);
             shopButton.onClick.AddListener(OpenShop);
-            
+            settingsButton.onClick.AddListener(OpenSettings);
         }
         
         private void PlayGame() => 
@@ -27,5 +29,8 @@ namespace View.UIViews.MainMenu
 
         private void OpenShop() =>
             _windowsManager.OpenWindow<ShopWindow>();
+
+        private void OpenSettings() => 
+            _windowsManager.OpenWindow<SettingsWindow>();
     }
 }

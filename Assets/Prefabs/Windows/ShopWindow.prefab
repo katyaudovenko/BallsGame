@@ -803,6 +803,7 @@ GameObject:
   - component: {fileID: 7772108400748992227}
   - component: {fileID: 5516888425529528988}
   - component: {fileID: 2191788514810662698}
+  - component: {fileID: 1398450442643637617}
   m_Layer: 5
   m_Name: FreezeText
   m_TagString: Untagged
@@ -926,6 +927,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1398450442643637617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4777757726779170705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e078b27cdf47049542ffc55480c60b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: firstProduct
 --- !u!1 &5271536318624175685
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +951,7 @@ GameObject:
   - component: {fileID: 2701521654959036144}
   - component: {fileID: 5722499126856173877}
   - component: {fileID: 5428766439335061916}
+  - component: {fileID: 2315719401977812961}
   m_Layer: 5
   m_Name: BombUpgradeText
   m_TagString: Untagged
@@ -1060,6 +1075,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2315719401977812961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5271536318624175685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e078b27cdf47049542ffc55480c60b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: secondProduct
 --- !u!1 &5537962535838518373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,6 +1499,7 @@ GameObject:
   - component: {fileID: 7669085973454850725}
   - component: {fileID: 4498850899984788577}
   - component: {fileID: 2699543930387657423}
+  - component: {fileID: 5562891547646698793}
   m_Layer: 5
   m_Name: CoinsUpgradeText
   m_TagString: Untagged
@@ -1594,6 +1623,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5562891547646698793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6080050196007526108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e078b27cdf47049542ffc55480c60b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: thirdProduct
 --- !u!1 &7345936636969355484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,6 +1647,7 @@ GameObject:
   - component: {fileID: 7649315723411912855}
   - component: {fileID: 1284247063040566760}
   - component: {fileID: 1768937532589721238}
+  - component: {fileID: 6545208884806050420}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -1728,6 +1771,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6545208884806050420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345936636969355484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e078b27cdf47049542ffc55480c60b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: shopTitle
 --- !u!1 &7641787432571277908
 GameObject:
   m_ObjectHideFlags: 0

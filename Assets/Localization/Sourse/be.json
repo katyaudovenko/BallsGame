@@ -1,0 +1,44 @@
+﻿{"data":
+  [
+    {
+      "key": "gameName",
+      "value": "Лопаюцца шарыкі"
+    },
+    {
+      "key": "scoreText",
+      "value": "Лік"
+    },
+    {
+      "key": "bestScoreText",
+      "value": "Рэкорд"
+    },
+    {
+      "key": "shopTitle",
+      "value": "Паляпшэнне"
+    },
+    {
+      "key": "firstProduct",
+      "value": "Час замаразкі"
+    },
+    {
+      "key": "secondProduct",
+      "value": "Радыус бомбы"
+    },
+    {
+      "key": "thirdProduct",
+      "value": "Колькасць манет"
+    },
+    {
+      "key": "loseTitleText",
+      "value": "Пройгрыш"
+    },
+    {
+      "key": "settingsTitle",
+      "value": "Наладжванне"
+    },
+    {
+      "key": "language",
+      "value": "Мова"
+    }
+  ]
+}

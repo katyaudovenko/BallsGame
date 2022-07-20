@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: CoinSpawnInfo
   m_EditorClassIdentifier: 
   coinsInfo:
-  - chance: 99
+  - chance: 10
     costBall: 1
     ballType: 0
-  - chance: 99
+  - chance: 50
     costBall: 3
     ballType: 1
-  - chance: 99
+  - chance: 80
     costBall: 5
     ballType: 2

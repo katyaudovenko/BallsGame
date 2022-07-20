@@ -104,6 +104,8 @@ MonoBehaviour:
     prefab: {fileID: 8111919773938101919, guid: 74a050585b1684249b40899ca11f2af6, type: 3}
   - count: 1
     prefab: {fileID: 2373349479173718217, guid: 0e6ecb837170d2d4cbd133a2e54e8a62, type: 3}
+  - count: 1
+    prefab: {fileID: 8844934284404261417, guid: d8197bbd9887ef544b82d376aedb192e, type: 3}
 --- !u!1 &8794629850176660067
 GameObject:
   m_ObjectHideFlags: 0
